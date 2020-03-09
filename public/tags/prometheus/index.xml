@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>prometheus on Terminal</title>
+    <title>prometheus on code and stuff</title>
     <link>/tags/prometheus/</link>
-    <description>Recent content in prometheus on Terminal</description>
+    <description>Recent content in prometheus on code and stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>Nicholas Dumas 2020</copyright>
     <lastBuildDate>Mon, 08 Jul 2019 10:45:07 -0400</lastBuildDate>
     
 	<atom:link href="/tags/prometheus/index.xml" rel="self" type="application/rss+xml" />

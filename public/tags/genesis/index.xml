@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>genesis on Terminal</title>
+    <title>genesis on code and stuff</title>
     <link>/tags/genesis/</link>
-    <description>Recent content in genesis on Terminal</description>
+    <description>Recent content in genesis on code and stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>Nicholas Dumas 2020</copyright>
     <lastBuildDate>Thu, 28 Feb 2019 19:37:06 +0000</lastBuildDate>
     
 	<atom:link href="/tags/genesis/index.xml" rel="self" type="application/rss+xml" />

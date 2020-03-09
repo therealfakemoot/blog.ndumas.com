@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Code on Terminal</title>
+    <title>Code on code and stuff</title>
     <link>/tags/code/</link>
-    <description>Recent content in Code on Terminal</description>
+    <description>Recent content in Code on code and stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>Nicholas Dumas 2020</copyright>
     <lastBuildDate>Sat, 10 Feb 2018 23:24:24 +0000</lastBuildDate>
     
 	<atom:link href="/tags/code/index.xml" rel="self" type="application/rss+xml" />
