@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Making Noise :: Terminal — A simple, retro theme for Hugo</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="The Conceit I&amp;rsquo;ve written about Genesis before, but it&amp;rsquo;s got a lot of complexity attached to it, and the roadmap I originally laid out has shifted a bit. For this post I&amp;rsquo;m focusing solely on Phase 1, the generation of geography. This is obviously a fundamental starting point, and it has roadblocked my progress on Genesis for quite some time ( somewhere on the order of 8 years or so )."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/making-noise/" />
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-113907906-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+<link rel="stylesheet" href="assets/style.css">
+
+  <link rel="stylesheet" href="assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+
+<link rel="shortcut icon" href="img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Making Noise :: Terminal — A simple, retro theme for Hugo" />
+<meta name="twitter:description" content="The Conceit I&amp;rsquo;ve written about Genesis before, but it&amp;rsquo;s got a lot of complexity attached to it, and the roadmap I originally laid out has shifted a bit. For this post I&amp;rsquo;m focusing solely on Phase 1, the generation of geography. This is obviously a fundamental starting point, and it has roadblocked my progress on Genesis for quite some time ( somewhere on the order of 8 years or so )." />
+<meta name="twitter:site" content="" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image" content="">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Making Noise :: Terminal — A simple, retro theme for Hugo">
+<meta property="og:description" content="The Conceit I&amp;rsquo;ve written about Genesis before, but it&amp;rsquo;s got a lot of complexity attached to it, and the roadmap I originally laid out has shifted a bit. For this post I&amp;rsquo;m focusing solely on Phase 1, the generation of geography. This is obviously a fundamental starting point, and it has roadblocked my progress on Genesis for quite some time ( somewhere on the order of 8 years or so )." />
+<meta property="og:url" content="/posts/making-noise/" />
+<meta property="og:site_name" content="Making Noise" />
+<meta property="og:image" content="">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2019-02-28 19:37:06 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+    
+
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="/posts/making-noise/">Making Noise</a></h1>
+  <div class="post-meta">
+      
+    <span class="post-date">
+      2019-02-28
+    </span>
+    
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="tags/genesis/">genesis</a>&nbsp;
+    
+    #<a href="tags/golang/">golang</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="the-conceit">The Conceit<a href="#the-conceit" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I&rsquo;ve written about Genesis <a href="/posts/genesis-roadmap/">before</a>, but it&rsquo;s got a lot of complexity attached to it, and the roadmap I originally laid out has shifted a bit. For this post I&rsquo;m focusing solely on Phase 1, the generation of geography. This is obviously a fundamental starting point, and it has roadblocked my progress on Genesis for quite some time ( somewhere on the order of 8 years or so ).</p>
+<p>My <a href="https://github.com/therealfakemoot/genesis_retired">original implementation</a> was written in Python; this was&hellip;servicable, but not ideal. Specifically, visualizing the terrain I generated was impossible at the time. Matplotlib would literally lock up my entire OS if I tried to render a contour plot of my maps if they exceeded 500 units on a side. I had to power cycle my desktop computer many times during testing.</p>
+<p>Eventually, I jumped from Python to Go, which was a pretty intuitive transition. I never abandoned Genesis, spiritually, but until this point I was never able to find technology that felt like it was adequate. Between Go&rsquo;s natural performance characteristics and the rise of tools like D3.js, I saw an opportunity to start clean.</p>
+<p>It took a year and some change to make real progress</p>
+<h1 id="making-noise">Making Noise<a href="#making-noise" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Noise generation, in the context of &ldquo;procedural&rdquo; world or map generation, describes the process of creating random numbers or data in a way that produces useful and sensible representations of geography. To generate values that are sensible, though, there are some specific considerations to keep in mind. Your typical (P)RNG generates values with relatively little correlation to each other. This is fine for cryptography, rolling dice, and so on, but it&rsquo;s not so great for generating maps. When assigning a &ldquo;height&rdquo; value to point (X, Y), you may get 39; for (X+1, Y), you might get -21, and so on.</p>
+<p>This is problematic because adjacent points on the map plane can vary wildly, leading to inconsistent or impossible geography: sharp peaks directly adjacent to impossible deep valleys with no transition or gradation between. This is where noise functions come in. Noise functions have the property of being &ldquo;continuous&rdquo; which means that when given inputs that are close to each other, the outputs change smoothly. A noise function, given (X, Y) as inputs might produce 89; when given (X+1, Y) it might produce 91. (X, Y+1) could yield 87. All these values are close together, and as the inputs vary, the outputs vary <em>smoothly</em>.</p>
+<p>There seem to be two major candidates for noise generation in amateur projects: <a href="https://en.wikipedia.org/wiki/Perlin_noise">Perlin noise</a> and <a href="https://en.wikipedia.org/wiki/Simplex_noise">Simplex noise</a>. Perlin noise was popular for a long while, but eventually deemed slow and prone to generating artifacts in the output that disrupted the &ldquo;natural&rdquo; feel of its content. Simplex noise is derived from the idea of extruding triangles into higher and higher dimensional space, but beyond that I haven&rsquo;t got a single clue how it works under the hood. I do know that it accepts integers ( in my use case, coordinates on the X,Y plane ) and spits out a floating point value in the range of <code>[-1,1]</code>.</p>
+<h1 id="quantization">Quantization<a href="#quantization" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>This is something I&rsquo;ve written about <a href="/golang-quantize/">before</a>, but shockingly, I was entirely wrong about the approach to a solution. At best, I overcomplicated it. Quantization is, using technical terms, transforming inputs in one interval to outputs in another. Specifcally, my noise generation algorithm returns floating point values in the range <code>[-1, 1]</code>. Conceptually, this is fine; the values produced for adjacent points in the x,y plane are reasonably similar.</p>
+<p>Practically speaking, it&rsquo;s pretty bad. When troubleshooting the noise generation and map rendering, trying to compare <code>1.253e-64</code> and <code>1.254e-64</code> is problematic; these values aren&rsquo;t super meaningful to a human. When expressed in long-form notation, it&rsquo;s almost impossible to properly track the values in your head. Furthermore, the rendering tools I experimented with would have a lot of trouble dealing with infinitesimally small floating point values, from a configuration perspective if not a mathematical one.</p>
+<p>In order to make this noise data comprehensible to humans, you can quantize it using, roughly speaking, three sets of parameters:</p>
+<ol>
+<li>The value being quantized</li>
+<li>The maximum and minimum input values</li>
+<li>The maximum and minimum output values</li>
+</ol>
+<p>Given these parameters, the function is <code>(v - (input.Min) ) * ( output.Max - output.Min ) / ( input.Max - input.Min ) + output.Min</code>. I won&rsquo;t go into explaining the math, because I didn&rsquo;t create it and probably don&rsquo;t understand it fully. But the important thing is that it works; it&rsquo;s pure math with no conditionals, no processing. As long as you provide these five parameters, it will work for all positive and negative inputs.</p>
+<p>Now, with the ability to scale my simplex noise into ranges that are useful for humans to look at, I was ready to start generating visualizations of the &ldquo;maps&rdquo; produced by this noise function. At long last, I was going to see the worlds I had been creating.</p>
+<h1 id="until-next-time">Until Next Time<a href="#until-next-time" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>This is where I&rsquo;ll close off this post and continue with the <a href="/posts/unfolding-the-map/">solutions</a>.</p>
+
+      </div></div>
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h">Read other posts</span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      <span class="button previous">
+        <a href="/posts/prom-primer/">
+          <span class="button__icon">←</span>
+          <span class="button__text">Prometheus Primer</span>
+        </a>
+      </span>
+      
+      
+      <span class="button next">
+        <a href="/posts/data-interfaces/">
+          <span class="button__text">Data Interfaces</span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2020 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script src="assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

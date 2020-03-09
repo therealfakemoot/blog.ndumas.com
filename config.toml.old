@@ -1,0 +1,69 @@
+baseURL = "https://ndumas.com/"
+
+
+googleAnalytics = "UA-113907906-1"
+disqusShortname = "ndumas-com"
+
+defaultContentLanguage = "en"
+
+theme = "hermit"
+
+pygmentsCodefences  = true
+pygmentsUseClasses  = true
+
+enableEmoji = true
+
+rssLimit = 10  # Maximum number of items in the RSS feed.
+
+logFile = "hugo.log"
+
+[author]
+  name = "Nick Dumas"
+
+[taxonomies]
+  tag = "tags"
+  category = ""  # Categories are disabled by default.
+
+[params]
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04 -0700"
+
+  themeColor = "#4410CE"
+  # themeColor = "#494f5c"
+
+  justifyContent = true # ?????
+
+  footerCopyright = '<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">code and stuff</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="/about-me/" property="cc:attributionName" rel="cc:attributionURL">Nick Dumas</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>'
+
+  homeSubtitle = "look what I can do"
+
+  [[params.social]]
+    name = "github"
+    url = "https://github.com/therealfakemoot"
+
+  [[params.social]]
+    name = "twitch"
+    url = "https://twitch.tv/uncledeezer"
+
+  [[params.social]]
+    name = "youtube"
+    url = "https://www.youtube.com/channel/UCkt9ddktOuRQkaaM3_n4OGQ"
+
+[menu]
+
+  [[menu.main]]
+    name = "Posts"
+    url = "posts/"
+    weight = 10
+
+  [[menu.main]]
+    name = "About Me"
+    url = "about-me/"
+    weight = 20
+
+  [[menu.main]]
+    name = "Portfolio"
+    url = "portfolio/"
+    weight = 20

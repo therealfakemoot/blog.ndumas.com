@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Path of Market: Part 1 :: Terminal — A simple, retro theme for Hugo</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Path of Exile is an ARPG similar to Diablo: procedurally generated maps, kill monsters to get loot so you can kill monsters faster. It&amp;rsquo;s pretty fun and offers a really flexible build system that allows for a lot of creativity in how you achieve your goals. Of particular interest is the API exposed by the development team.
+Stashes Each character has a set of &amp;ldquo;stashes&amp;rdquo;. These are storage boxes which can be flagged a public."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/path-of-market1/" />
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-113907906-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+<link rel="stylesheet" href="assets/style.css">
+
+  <link rel="stylesheet" href="assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+
+<link rel="shortcut icon" href="img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Path of Market: Part 1 :: Terminal — A simple, retro theme for Hugo" />
+<meta name="twitter:description" content="Path of Exile is an ARPG similar to Diablo: procedurally generated maps, kill monsters to get loot so you can kill monsters faster. It&amp;rsquo;s pretty fun and offers a really flexible build system that allows for a lot of creativity in how you achieve your goals. Of particular interest is the API exposed by the development team.
+Stashes Each character has a set of &amp;ldquo;stashes&amp;rdquo;. These are storage boxes which can be flagged a public." />
+<meta name="twitter:site" content="" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image" content="">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Path of Market: Part 1 :: Terminal — A simple, retro theme for Hugo">
+<meta property="og:description" content="Path of Exile is an ARPG similar to Diablo: procedurally generated maps, kill monsters to get loot so you can kill monsters faster. It&amp;rsquo;s pretty fun and offers a really flexible build system that allows for a lot of creativity in how you achieve your goals. Of particular interest is the API exposed by the development team.
+Stashes Each character has a set of &amp;ldquo;stashes&amp;rdquo;. These are storage boxes which can be flagged a public." />
+<meta property="og:url" content="/posts/path-of-market1/" />
+<meta property="og:site_name" content="Path of Market: Part 1" />
+<meta property="og:image" content="">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2019-07-08 10:45:07 -0400 EDT" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+    
+
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="/posts/path-of-market1/">Path of Market: Part 1</a></h1>
+  <div class="post-meta">
+      
+    <span class="post-date">
+      2019-07-08
+    </span>
+    
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="tags/golang/">golang</a>&nbsp;
+    
+    #<a href="tags/prometheus/">prometheus</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  <div class="post-content"><div>
+        <p>Path of Exile is an ARPG similar to Diablo: procedurally generated maps, kill monsters to get loot so you can kill monsters faster. It&rsquo;s pretty fun and offers a really flexible build system that allows for a lot of creativity in how you achieve your goals. Of particular interest is the API exposed by the development team.</p>
+<h1 id="stashes">Stashes<a href="#stashes" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Each character has a set of &ldquo;stashes&rdquo;. These are storage boxes which can be flagged a public. Public boxes are exposed via the <a href="https://www.pathofexile.com/developer/docs/api-resource-public-stash-tabs">api</a> endpoint. This API is interesting in how it handles paging; each request gives you an arbitrary number of stashes, and a GUID indicating the last stash provided by the API. Subsequent requests to the API can include the aforementioned GUID in the <code>id</code> url parameter to request the next batch of stashes. This is a sorta crude stream, in practice. Maybe one day they&rsquo;ll reimplement it as a websocket API or something fun like that.</p>
+<h1 id="the-market">The Market<a href="#the-market" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>This API is what powers the market for the Path of Exile community. There&rsquo;s <a href="https://poe.watch/prices?league=Legion">quite</a> <a href="https://poe.trade/">a</a> few sites and tools leveraging this API, including the <a href="https://www.pathofexile.com/trade/search/Legion">official market site</a>. These market sites are very handy because they offer complex search functionality and various levels of &ldquo;live&rdquo; alerting when new items become available.</p>
+<p>What I found fascinating, though, is the ability to monitor trends, more than finding individual items. As a former EVE player, I was used to relatively advanced market features like price histories, buy/sell orders, advanced graphing options etc and it&rsquo;s something I&rsquo;ve missed everywhere I&rsquo;ve gone since. After some investigation, I found that Prometheus and Grafana could offer a powerful base to build upon. Prometheus is a tool for storing time-based &ldquo;metrics&rdquo;, and Grafana is a visualizer that can connect to Prometheus and other data sources and provide graphs, charts, tables, and all sorts of tools for seeing your data. Below is an example of a chart showing memory usage on a Kubernetes pod.</p>
+
+  <figure class="left" >
+    <img src="/img/grafana-mem-usage.png"   />
+    
+      <figcaption class="center" >Grafana memory usage chart</figcaption>
+    
+  </figure>
+
+
+<h1 id="first-steps">First Steps<a href="#first-steps" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Obviously, the first step is talking to the official Path of Exile API and getting these stashes into a format that I can work with programmatically. The JSON payload was moderately complex, but with the help of some <a href="https://mholt.github.io/json-to-go/">tooling</a> and unit testing I was able to build out some Go structs that contained all the metadata available.</p>
+<p>A particularly fun challenge was this one, describing how &ldquo;gem&rdquo; items could be slotted into an item. This was a challenge because the API can return either a string <em>or</em> a boolean for a specific set of fields. This is, in my opinion, not as &ldquo;well behaved&rdquo; API but you don&rsquo;t always get the luxury of working with ones that are well behaved. This unmarshaling solution helps account for this inconsistency and populates the relevant fields accordingly.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">SocketAttr</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">Type</span>  <span class="kt">string</span>
+        <span class="nx">Abyss</span> <span class="kt">bool</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">sa</span> <span class="o">*</span><span class="nx">SocketAttr</span><span class="p">)</span> <span class="nf">UnmarshalJSON</span><span class="p">(</span><span class="nx">data</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">val</span> <span class="kd">interface</span><span class="p">{}</span>
+
+        <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">val</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">err</span>
+        <span class="p">}</span>
+
+        <span class="k">switch</span> <span class="nx">val</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="kt">string</span><span class="p">:</span>
+                <span class="nx">sa</span><span class="p">.</span><span class="nx">Type</span> <span class="p">=</span> <span class="nx">val</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span>
+        <span class="k">case</span> <span class="kt">bool</span><span class="p">:</span>
+                <span class="nx">sa</span><span class="p">.</span><span class="nx">Abyss</span> <span class="p">=</span> <span class="nx">val</span><span class="p">.(</span><span class="kt">bool</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">SocketColour</span> <span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">Colour</span> <span class="kt">string</span>
+        <span class="nx">Abyss</span>  <span class="kt">bool</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">sc</span> <span class="o">*</span><span class="nx">SocketColour</span><span class="p">)</span> <span class="nf">UnmarshalJSON</span><span class="p">(</span><span class="nx">data</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">val</span> <span class="kd">interface</span><span class="p">{}</span>
+
+        <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">val</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">err</span>
+        <span class="p">}</span>
+
+        <span class="k">switch</span> <span class="nx">val</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="kt">string</span><span class="p">:</span>
+                <span class="nx">sc</span><span class="p">.</span><span class="nx">Colour</span> <span class="p">=</span> <span class="nx">val</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span>
+        <span class="k">case</span> <span class="kt">bool</span><span class="p">:</span>
+                <span class="nx">sc</span><span class="p">.</span><span class="nx">Abyss</span> <span class="p">=</span> <span class="nx">val</span><span class="p">.(</span><span class="kt">bool</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>With that done, I had passing tests that parsed a variety of sample items I had manually extracted from the API. Next was turning these into a &ldquo;stream&rdquo; that I could process. Channels seemed like a natural fit for this task; the API did not guarantee any number of results at any time and only declares that you periodically request the last ID you were given by the API.</p>
+<p>The full code is <a href="https://github.com/therealfakemoot/pom/blob/master/poe/client.go">here</a>, but I&rsquo;ll highlight the parts that are interesting, and not standard issue HTTP client fare.</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">		<span class="nx">d</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">NewDecoder</span><span class="p">(</span><span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+		<span class="nx">err</span> <span class="p">=</span> <span class="nx">d</span><span class="p">.</span><span class="nf">Decode</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">e</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">sa</span><span class="p">.</span><span class="nx">Err</span> <span class="o">&lt;-</span> <span class="nx">StreamError</span><span class="p">{</span>
+				<span class="nx">PageID</span><span class="p">:</span> <span class="nx">sa</span><span class="p">.</span><span class="nx">NextID</span><span class="p">,</span>
+				<span class="nx">Err</span><span class="p">:</span>    <span class="nx">err</span><span class="p">,</span>
+			<span class="p">}</span>
+			<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;error decoding envelope: %s&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+			<span class="k">continue</span>
+		<span class="p">}</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;next page ID: %s&#34;</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">NextChangeID</span><span class="p">)</span>
+		<span class="nx">sa</span><span class="p">.</span><span class="nx">NextID</span> <span class="p">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">NextChangeID</span>
+
+		<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">stash</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">e</span><span class="p">.</span><span class="nx">Stashes</span> <span class="p">{</span>
+			<span class="nx">sa</span><span class="p">.</span><span class="nx">Stashes</span> <span class="o">&lt;-</span> <span class="nx">stash</span>
+		<span class="p">}</span></code></pre></div>
+<p>This snippet is where the magic happens. JSON gets decoded, errors are pushed into a channel for processing. Finally, stashes are pushed into a channel to be consumed outside inside the main loop. And here&rsquo;s where I&rsquo;ll leave off for now. There&rsquo;s quite a bit more code to cover, and I&rsquo;m still refactoring pieces of it relatively frequently, so I don&rsquo;t want to write too much about things that I expect to change.</p>
+
+      </div></div>
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h">Read other posts</span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      
+      <span class="button next">
+        <a href="/posts/prom-primer/">
+          <span class="button__text">Prometheus Primer</span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2020 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script src="assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

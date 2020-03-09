@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Code on Terminal</title>
+    <link>/tags/code/</link>
+    <description>Recent content in Code on Terminal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 10 Feb 2018 23:24:24 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/code/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>First Post</title>
+      <link>/posts/first-post/</link>
+      <pubDate>Sat, 10 Feb 2018 23:24:24 +0000</pubDate>
+      
+      <guid>/posts/first-post/</guid>
+      <description>Introduction I&amp;rsquo;ve been programming with a passion for the last 15 years. I started with Python 2.2 or so and stuck with that for a good while, I also spent a few years doing web development work and most recently added Golang to my kit.
+This Site This site is going to be a portfolio/showroom for my projects. I&amp;rsquo;ll try to find clever ways to interact with my tools through the browser to take advantage of the optimizations and growing array of high power tools being baked into browsers like Chrome and Firefox.</description>
+    </item>
+    
+  </channel>
+</rss>

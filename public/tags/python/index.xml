@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on Terminal</title>
+    <link>/tags/python/</link>
+    <description>Recent content in python on Terminal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 03 Jun 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Genesis Roadmap</title>
+      <link>/posts/genesis-roadmap/</link>
+      <pubDate>Mon, 03 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/genesis-roadmap/</guid>
+      <description>Recently, I was working on an idea for a MUD; the general idea was to build a game with detailed &amp;lsquo;inhabited&amp;rsquo; areas such as cities and dungeons as well as expansive wilderness regions for exploring and claiming by players. Naturally, I realized that doing this by hand would be unbearably tedious. A semi-realistic MUD world could contain 4,000,000 rooms; manually creating &amp;ldquo;Meadowy Plains #1421&amp;rdquo; would be error-prone and would drain the creative ability of a human.</description>
+    </item>
+    
+  </channel>
+</rss>

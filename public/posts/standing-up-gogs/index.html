@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Standing Up Gogs :: Terminal — A simple, retro theme for Hugo</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="The Reveal It took me way longer than I&amp;rsquo;d like to admit but I finally discovered why I was not able to properly reverse proxy a subdomain ( git.ndumas.com ). As it turns out, SELinux was the culprit. I wanted to write a short post about this partly to reinforce my own memory and maybe to make this sort of thing easier to find for others encountering &amp;lsquo;mysterious&amp;rsquo; issues when operating on SELinux Fedora installations like Digital Ocean droplets."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/standing-up-gogs/" />
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-113907906-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+<link rel="stylesheet" href="assets/style.css">
+
+  <link rel="stylesheet" href="assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+
+<link rel="shortcut icon" href="img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Standing Up Gogs :: Terminal — A simple, retro theme for Hugo" />
+<meta name="twitter:description" content="The Reveal It took me way longer than I&amp;rsquo;d like to admit but I finally discovered why I was not able to properly reverse proxy a subdomain ( git.ndumas.com ). As it turns out, SELinux was the culprit. I wanted to write a short post about this partly to reinforce my own memory and maybe to make this sort of thing easier to find for others encountering &amp;lsquo;mysterious&amp;rsquo; issues when operating on SELinux Fedora installations like Digital Ocean droplets." />
+<meta name="twitter:site" content="" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image" content="">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Standing Up Gogs :: Terminal — A simple, retro theme for Hugo">
+<meta property="og:description" content="The Reveal It took me way longer than I&amp;rsquo;d like to admit but I finally discovered why I was not able to properly reverse proxy a subdomain ( git.ndumas.com ). As it turns out, SELinux was the culprit. I wanted to write a short post about this partly to reinforce my own memory and maybe to make this sort of thing easier to find for others encountering &amp;lsquo;mysterious&amp;rsquo; issues when operating on SELinux Fedora installations like Digital Ocean droplets." />
+<meta property="og:url" content="/posts/standing-up-gogs/" />
+<meta property="og:site_name" content="Standing Up Gogs" />
+<meta property="og:image" content="">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2018-02-20 23:57:30 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+    
+
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="/posts/standing-up-gogs/">Standing Up Gogs</a></h1>
+  <div class="post-meta">
+      
+    <span class="post-date">
+      2018-02-20
+    </span>
+    
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="tags/nginx/">nginx</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="the-reveal">The Reveal<a href="#the-reveal" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>It took me way longer than I&rsquo;d like to admit but I finally discovered why I was not able to properly reverse proxy a subdomain ( <a href="http://git.ndumas.com">git.ndumas.com</a> ). As it turns out, SELinux was the culprit. I wanted to write a short post about this partly to reinforce my own memory and maybe to make this sort of thing easier to find for others encountering &lsquo;mysterious&rsquo; issues when operating on SELinux Fedora installations like Digital Ocean droplets.</p>
+<h1 id="symptoms">Symptoms<a href="#symptoms" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>SELinux interference with nginx doing its business will generally manifest as a variation on &ldquo;permission denied&rdquo;. Here&rsquo;s one such error message:</p>
+<pre><code>2018/02/20 23:32:51 [crit] 4679#0: *1 connect() to 127.0.0.1:3000 failed (13: Permission denied) while connecting to upstream, client: xxx.xxx.xxx.xxx, server: git.ndumas.com, request: &quot;GET /favicon.ico HTTP/1.1&quot;, upstream: &quot;http://127.0.0.1:3000/favicon.ico&quot;, host: &quot;git.ndumas.com&quot;, referrer: &quot;http://git.ndumas.com/&quot;
+</code></pre><h1 id="solution">Solution<a href="#solution" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Resolving this requires whitelisting whatever action/context SELinux is restricting. There&rsquo;s a useful tool, <code>audit2allow</code>, that will build a module for you automatically. You can invoke it like this:</p>
+<pre><code>sudo cat /var/log/audit.log|grep nginx|grep denied|audit2allow -M filename
+</code></pre><p>Once you&rsquo;ve done this, you&rsquo;ll have a file named <code>filename.pp</code>. All you have to do next is:</p>
+<pre><code>semodule -i filename.pp
+</code></pre><p>SELinux will revise its policies and any restrictions nginx encountered will be whitelisted.</p>
+
+      </div></div>
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h">Read other posts</span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      <span class="button previous">
+        <a href="/posts/genesis-flags/">
+          <span class="button__icon">←</span>
+          <span class="button__text">Genesis Flags</span>
+        </a>
+      </span>
+      
+      
+      <span class="button next">
+        <a href="/posts/first-post/">
+          <span class="button__text">First Post</span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2020 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script src="assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

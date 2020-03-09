@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Prometheus Primer :: Terminal — A simple, retro theme for Hugo</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Querying Basics Queries run against metrics, which are sets of timeseries data. They have millisecond granularity and are stored as floating point values.
+Using Queries Queries reference individual metrics and perform some analysis on them. Most often you use the rate function to &amp;ldquo;bucket&amp;rdquo; a metric into time intervals. Once the metric in question has been bucketed into time intervals, you can do comparisons.
+(rate(http_response_size_bytes[1m])) &amp;gt; 512 This query takes the size of http responses in bytes and buckets it into one minute intervals and drops any data points smaller than 512 bytes."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/prom-primer/" />
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-113907906-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+<link rel="stylesheet" href="assets/style.css">
+
+  <link rel="stylesheet" href="assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+
+<link rel="shortcut icon" href="img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Prometheus Primer :: Terminal — A simple, retro theme for Hugo" />
+<meta name="twitter:description" content="Querying Basics Queries run against metrics, which are sets of timeseries data. They have millisecond granularity and are stored as floating point values.
+Using Queries Queries reference individual metrics and perform some analysis on them. Most often you use the rate function to &amp;ldquo;bucket&amp;rdquo; a metric into time intervals. Once the metric in question has been bucketed into time intervals, you can do comparisons.
+(rate(http_response_size_bytes[1m])) &amp;gt; 512 This query takes the size of http responses in bytes and buckets it into one minute intervals and drops any data points smaller than 512 bytes." />
+<meta name="twitter:site" content="" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image" content="">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Prometheus Primer :: Terminal — A simple, retro theme for Hugo">
+<meta property="og:description" content="Querying Basics Queries run against metrics, which are sets of timeseries data. They have millisecond granularity and are stored as floating point values.
+Using Queries Queries reference individual metrics and perform some analysis on them. Most often you use the rate function to &amp;ldquo;bucket&amp;rdquo; a metric into time intervals. Once the metric in question has been bucketed into time intervals, you can do comparisons.
+(rate(http_response_size_bytes[1m])) &amp;gt; 512 This query takes the size of http responses in bytes and buckets it into one minute intervals and drops any data points smaller than 512 bytes." />
+<meta property="og:url" content="/posts/prom-primer/" />
+<meta property="og:site_name" content="Prometheus Primer" />
+<meta property="og:image" content="">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2019-07-04 14:56:12 -0400 EDT" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+    
+
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="/posts/prom-primer/">Prometheus Primer</a></h1>
+  <div class="post-meta">
+      
+    <span class="post-date">
+      2019-07-04
+    </span>
+    
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="tags/prometheus/">prometheus</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="querying-basics">Querying Basics<a href="#querying-basics" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Queries run against <em>metrics</em>, which are sets of timeseries data. They have millisecond granularity and are stored as floating point values.</p>
+<h1 id="using-queries">Using Queries<a href="#using-queries" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Queries reference individual metrics and perform some analysis on them. Most often you use the <code>rate</code> function to &ldquo;bucket&rdquo; a metric into time intervals. Once the metric in question has been bucketed into time intervals, you can do comparisons.</p>
+<pre><code>(rate(http_response_size_bytes[1m])) &gt; 512
+</code></pre><p>This query takes the size of http responses in bytes and buckets it into one minute intervals and drops any data points smaller than 512 bytes. Variations on this query could be used to analyse how bandwidth is being consumed across your instrumented processes; a spike or trending rise in high bandwidth requests could trigger an alert to prevent data overages breaking the bank.</p>
+<pre><code>sum without(instance, node_name, hostname, kubernetes_io_hostname) (rate(http_request_duration_microseconds[1m])) &gt; 2000
+</code></pre><p>This query looks at the metric <code>http_request_duration_microseconds</code>, buckets it into one minute intervals, and then drops all data points that are smaller than 2000 microseconds. Increases in response durations might indicate network congestion or other I/O contention.</p>
+<h2 id="labels">Labels<a href="#labels" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Prometheus lets you apply labels to your metrics. Some are specificed in the scrape configurations; these are usually things like the hostname of the machine, its datacenter or geographic region, etc. Instrumented applications can also specify labels when generating metrics; these are used to indicate things known at runtime like the specific HTTP route ( e.g. <code>/blog</code> or <code>/images/kittens</code> ) being measured.</p>
+<p>Prometheus queries allow you to specify labels to match against which will let you control how your data is grouped together; you can query against geographic regions, specific hostnames, etc. It also supports regular expressions so you can match against patterns instead of literal strict matches.</p>
+<pre><code>(rate(http_response_size_bytes{kubernetes_io_hostname=&quot;node-y3ul&quot;}[1m])) &gt; 512
+(rate(http_response_size_bytes{version=~&quot;v1\.2\.*&quot;}[1m])) &gt; 512
+</code></pre><p>An important consideration is that when querying, prometheus considers metrics with any difference in labels as distinct sets of data. Two HTTP servers running in the same datacenter can have different hostnames in their labels; this is useful when you want to monitor error rates per-container but can be detrimental when you want to examine the data for the datacenter as a whole.</p>
+<p>To that end, prometheus gives you the ability to strip labels off the metrics in the context of a given query. This is useful for generating aggregate reports.</p>
+<pre><code>sum without(instance, node_name, hostname, kubernetes_io_hostname)(rate(go_goroutines[1m]))
+</code></pre><h1 id="alerts">Alerts<a href="#alerts" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>All of this is fun to play with, but none of it is useful if you have to manually run the queries all the time. On its own, prometheus can generate &ldquo;alerts&rdquo; but these don&rsquo;t go anywhere on their own; they&rsquo;re set in the config file and look like this:</p>
+<pre><code>groups:
+- name: example
+  rules:
+  - alert: HighErrorRate
+    expr: job:request_latency_seconds:mean5m{job=&quot;myjob&quot;} &gt; 0.5
+    for: 10m
+    labels:
+      severity: page
+    annotations:
+      summary: High request latency
+  - alert: TotalSystemFailure
+    expr: job:avg_over_time(up{job=&quot;appName&quot;}[5m]) &lt; .5
+    for: 5m
+    labels:
+      severity: page
+    annotations:
+      summary: Large scale application outage
+</code></pre><p>Alerts can have labels and metadata applied much like regular data sources. On their own, however, they don&rsquo;t <em>do</em> anything. Fortunately, the prometheus team has released <a href="https://github.com/prometheus/alertmanager">AlertManager</a> to work with these alerts. AlertManager receives these events and dispatches them to various services, ranging from email to slack channels to VictorOps or other paging services.</p>
+<p>AlertManager lets you define teams and hierarchies that alerts can cascade through and create conditions during which some subsets of alerts are emporarily muted; if a higher priority event is breaking, more trivial alerts can be ignored for a short time if desired.</p>
+
+      </div></div>
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h">Read other posts</span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      <span class="button previous">
+        <a href="/posts/path-of-market1/">
+          <span class="button__icon">←</span>
+          <span class="button__text">Path of Market: Part 1</span>
+        </a>
+      </span>
+      
+      
+      <span class="button next">
+        <a href="/posts/making-noise/">
+          <span class="button__text">Making Noise</span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2020 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script src="assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

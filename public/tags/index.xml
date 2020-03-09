@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Terminal</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on Terminal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 08 Jul 2019 10:45:07 -0400</lastBuildDate>
+    
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>go</title>
+      <link>/tags/go/</link>
+      <pubDate>Mon, 08 Jul 2019 10:45:07 -0400</pubDate>
+      
+      <guid>/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang</title>
+      <link>/tags/golang/</link>
+      <pubDate>Mon, 08 Jul 2019 10:45:07 -0400</pubDate>
+      
+      <guid>/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>prometheus</title>
+      <link>/tags/prometheus/</link>
+      <pubDate>Mon, 08 Jul 2019 10:45:07 -0400</pubDate>
+      
+      <guid>/tags/prometheus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>genesis</title>
+      <link>/tags/genesis/</link>
+      <pubDate>Thu, 28 Feb 2019 19:37:06 +0000</pubDate>
+      
+      <guid>/tags/genesis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>math</title>
+      <link>/tags/math/</link>
+      <pubDate>Sun, 22 Apr 2018 17:30:51 +0000</pubDate>
+      
+      <guid>/tags/math/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fedora</title>
+      <link>/tags/fedora/</link>
+      <pubDate>Fri, 13 Apr 2018 16:28:20 +0000</pubDate>
+      
+      <guid>/tags/fedora/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>/tags/nginx/</link>
+      <pubDate>Fri, 13 Apr 2018 16:28:20 +0000</pubDate>
+      
+      <guid>/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>selinux</title>
+      <link>/tags/selinux/</link>
+      <pubDate>Fri, 13 Apr 2018 16:28:20 +0000</pubDate>
+      
+      <guid>/tags/selinux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Code</title>
+      <link>/tags/code/</link>
+      <pubDate>Sat, 10 Feb 2018 23:24:24 +0000</pubDate>
+      
+      <guid>/tags/code/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Site Updates</title>
+      <link>/tags/site-updates/</link>
+      <pubDate>Sat, 10 Feb 2018 23:24:24 +0000</pubDate>
+      
+      <guid>/tags/site-updates/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

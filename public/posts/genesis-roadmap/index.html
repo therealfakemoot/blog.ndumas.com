@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Genesis Roadmap :: Terminal — A simple, retro theme for Hugo</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Recently, I was working on an idea for a MUD; the general idea was to build a game with detailed &amp;lsquo;inhabited&amp;rsquo; areas such as cities and dungeons as well as expansive wilderness regions for exploring and claiming by players. Naturally, I realized that doing this by hand would be unbearably tedious. A semi-realistic MUD world could contain 4,000,000 rooms; manually creating &amp;ldquo;Meadowy Plains #1421&amp;rdquo; would be error-prone and would drain the creative ability of a human."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/genesis-roadmap/" />
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-113907906-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+<link rel="stylesheet" href="assets/style.css">
+
+  <link rel="stylesheet" href="assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+
+<link rel="shortcut icon" href="img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Genesis Roadmap :: Terminal — A simple, retro theme for Hugo" />
+<meta name="twitter:description" content="Recently, I was working on an idea for a MUD; the general idea was to build a game with detailed &amp;lsquo;inhabited&amp;rsquo; areas such as cities and dungeons as well as expansive wilderness regions for exploring and claiming by players. Naturally, I realized that doing this by hand would be unbearably tedious. A semi-realistic MUD world could contain 4,000,000 rooms; manually creating &amp;ldquo;Meadowy Plains #1421&amp;rdquo; would be error-prone and would drain the creative ability of a human." />
+<meta name="twitter:site" content="" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image" content="">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Genesis Roadmap :: Terminal — A simple, retro theme for Hugo">
+<meta property="og:description" content="Recently, I was working on an idea for a MUD; the general idea was to build a game with detailed &amp;lsquo;inhabited&amp;rsquo; areas such as cities and dungeons as well as expansive wilderness regions for exploring and claiming by players. Naturally, I realized that doing this by hand would be unbearably tedious. A semi-realistic MUD world could contain 4,000,000 rooms; manually creating &amp;ldquo;Meadowy Plains #1421&amp;rdquo; would be error-prone and would drain the creative ability of a human." />
+<meta property="og:url" content="/posts/genesis-roadmap/" />
+<meta property="og:site_name" content="Genesis Roadmap" />
+<meta property="og:image" content="">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2013-06-03 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+    
+
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="/posts/genesis-roadmap/">Genesis Roadmap</a></h1>
+  <div class="post-meta">
+      
+    <span class="post-date">
+      2013-06-03
+    </span>
+    
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="tags/genesis/">genesis</a>&nbsp;
+    
+    #<a href="tags/python/">python</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  <div class="post-content"><div>
+        <p>Recently, I was working on an idea for a MUD; the general idea was to build a game with detailed &lsquo;inhabited&rsquo; areas such as cities and dungeons as well as expansive wilderness regions for exploring and claiming by players. Naturally, I realized that doing this by hand would be unbearably tedious. A semi-realistic MUD world could contain 4,000,000 rooms; manually creating &ldquo;Meadowy Plains #1421&rdquo; would be error-prone and would drain the creative ability of a human. Thus, <a href="https://github.com/therealfakemoot/genesis-retired">Genesis</a> was conceived. Note: this repoistory is now retired; the Python version of this project will not be pursued any longer.</p>
+<h1 id="moving-beyond-the-mud">Moving Beyond the MUD<a href="#moving-beyond-the-mud" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Planning a world generator for a MUD was an excellent idea, but very limited in scope. In particular, I realized how little I wanted to indelibly restrict myself to <a href="http://evennia.com/">Evennia</a> as the framework in which the creation process happened. Evennia offers a great deal of power and flexibility, but the restriction of MUD concepts got me thinking that I should generalise the project even further.</p>
+<p>In the end, I want Genesis to be a completely standalone world-design toolkit. The target audience includes tabletop gamers who need a physical setting for their campaigns, as well as authors who can create characters and stories, but have trouble with the tedium of drawing coastlines and mountain ranges out by hand.</p>
+<h1 id="the-vision">The Vision<a href="#the-vision" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>As of the time of writing, implementation of Phase 1 is only partially completed. What follows is my overall goals for what each phase can accomplish.</p>
+<h2 id="phase-1-heightmap-generation">Phase 1: Heightmap Generation<a href="#phase-1-heightmap-generation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Using a <a href="http://en.wikipedia.org/wiki/Simplex">simplex</a> function, I populate an array with values representing the height of the world&rsquo;s terrain at a given coordinate. This is pretty simple; it&rsquo;s a pure function and when run with PyPy it absolutely screams. There&rsquo;s little to be said about this step because it produces the least interesting output. If so desired, however, a user could take the topological map generated and do whatever they please without following any further phases.</p>
+<h2 id="phase-2-water-placement">Phase 2: Water Placement<a href="#phase-2-water-placement" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>The water placement phase is the simplest phase, yet has the most potentially drastic consequences in further phases. Given a heightmap from Phase 1, the user will be able to select a sea-level and at that point all areas of the map with a height below sea level will be considered underwater. This step can be reapplied to smaller subsections of the map allowing for the creation of mountain lakes and other bodies of water which are not at sea-level.</p>
+<h2 id="phase-3-biome-assignment">Phase 3: Biome Assignment<a href="#phase-3-biome-assignment" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Biome assignment is a rather complex problem. Full weather simulations are way beyond what one needs for an interesting map. To this end, I&rsquo;ve found what I believe to be two excellent candidates for biome classification systems.</p>
+
+  <figure class="left" >
+    <img src="/img/two_biome.jpg"   />
+    
+      <figcaption class="center" >Two-axis Biome Chart</figcaption>
+    
+  </figure>
+
+
+<p>This graph uses two axes to describe biomes: rainfall and temperature. This is an exceedingly easy metric to use. Proximity to water is a simple way to determine a region&rsquo;s average rainfall. Temperature is also an easy calculation, given a planet&rsquo;s axial tilt and the latitude and longitude of a location.</p>
+
+  <figure class="left" >
+    <img src="/img/tri_biome.png"   />
+    
+      <figcaption class="center" >Three-axis Biome Chart</figcaption>
+    
+  </figure>
+
+
+<p>This graph is slightly more detailed, factoring in a location&rsquo;s elevation into the determination of its biome. As this phase is still unimplemented, options remain open.</p>
+<h2 id="phase-4-feature-generation">Phase 4: Feature Generation<a href="#phase-4-feature-generation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>In the Milestones and Issues, I use the term &lsquo;feature&rsquo; as a kind of catch-all; this phase is the most complex because it involves procedural generation of landmarks, cities, dungeons, villages, huts, and other details that make a piece of land anything more than an uninteresting piece of dirt. This phase will have the most direct interaction by a user, primarily in the form of reviewing generated features and approving or rejecting them for inclusion in the world during Phase 5. In this Phase, the user will determine what types of features they desire (large above ground stone structures, small villages, underground dungeons, and so on).</p>
+<h2 id="phase-5-feature-placement">Phase 5: Feature Placement<a href="#phase-5-feature-placement" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Phase 5 takes the objects generated during Phase 4 and allows the user the option of manually placing features, allowing Genesis to determine on its own where to place them, or some combination of both. Although it wouldn&rsquo;t make much sense to have multiple identical cities in the same world, this phase will allow duplication of features allowing for easy placement of templates which can be customised at some future point.</p>
+<h1 id="in-practice">In Practice<a href="#in-practice" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>The Genesis Github repository currently has a working demo of Phase 1. CPython is exceedingly slow at generating large ranges of simplex values and as such, the demo will crash or stall when given exceedingly large inputs. This is currently being worked on as per #8.</p>
+
+      </div></div>
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h">Read other posts</span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      <span class="button previous">
+        <a href="/posts/first-post/">
+          <span class="button__icon">←</span>
+          <span class="button__text">First Post</span>
+        </a>
+      </span>
+      
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2020 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script src="assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Selinux and Nginx :: Terminal — A simple, retro theme for Hugo</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="SELinux DigitalOcean&amp;rsquo;s Fedora droplets include SELinux. I don&amp;rsquo;t know a great deal about SELinux but it&amp;rsquo;s presumably a good thing for helping prevent privilege escalations and so on. Unfortunately, it can be troublesome when trying to do simple static site stuff with nginx.
+nginx With Fedora and nginx and selinux all in use simultaneously, you are allowed to tell nginx to serve files that are owned/grouped under a user other than nginx&amp;rsquo;s."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/selinux-and-nginx/" />
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-113907906-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+<link rel="stylesheet" href="assets/style.css">
+
+  <link rel="stylesheet" href="assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+
+<link rel="shortcut icon" href="img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Selinux and Nginx :: Terminal — A simple, retro theme for Hugo" />
+<meta name="twitter:description" content="SELinux DigitalOcean&amp;rsquo;s Fedora droplets include SELinux. I don&amp;rsquo;t know a great deal about SELinux but it&amp;rsquo;s presumably a good thing for helping prevent privilege escalations and so on. Unfortunately, it can be troublesome when trying to do simple static site stuff with nginx.
+nginx With Fedora and nginx and selinux all in use simultaneously, you are allowed to tell nginx to serve files that are owned/grouped under a user other than nginx&amp;rsquo;s." />
+<meta name="twitter:site" content="" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image" content="">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Selinux and Nginx :: Terminal — A simple, retro theme for Hugo">
+<meta property="og:description" content="SELinux DigitalOcean&amp;rsquo;s Fedora droplets include SELinux. I don&amp;rsquo;t know a great deal about SELinux but it&amp;rsquo;s presumably a good thing for helping prevent privilege escalations and so on. Unfortunately, it can be troublesome when trying to do simple static site stuff with nginx.
+nginx With Fedora and nginx and selinux all in use simultaneously, you are allowed to tell nginx to serve files that are owned/grouped under a user other than nginx&amp;rsquo;s." />
+<meta property="og:url" content="/posts/selinux-and-nginx/" />
+<meta property="og:site_name" content="Selinux and Nginx" />
+<meta property="og:image" content="">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2018-04-13 16:28:20 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+<div class="container headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+    
+
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/showcase">Showcase</a></li>
+      
+    
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="/posts/selinux-and-nginx/">Selinux and Nginx</a></h1>
+  <div class="post-meta">
+      
+    <span class="post-date">
+      2018-04-13
+    </span>
+    
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="tags/selinux/">selinux</a>&nbsp;
+    
+    #<a href="tags/nginx/">nginx</a>&nbsp;
+    
+    #<a href="tags/fedora/">fedora</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="selinux">SELinux<a href="#selinux" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>DigitalOcean&rsquo;s Fedora droplets include SELinux. I don&rsquo;t know a great deal about SELinux but it&rsquo;s presumably a good thing for helping prevent privilege escalations and so on. Unfortunately, it can be troublesome when trying to do simple static site stuff with nginx.</p>
+<h2 id="nginx">nginx<a href="#nginx" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>With Fedora and nginx and selinux all in use simultaneously, you are allowed to tell nginx to serve files that are owned/grouped under a user other than nginx&rsquo;s. This is phenomenally useful when working with something like hugo. This is possible because SELinux monitors/intercepts syscalls relating to file access and approves/denies them based on context, role, and type. SELinux concepts are covered pretty thoroughly <a href="https://www.digitalocean.com/community/tutorials/an-introduction-to-selinux-on-centos-7-part-1-basic-concepts">here</a> and <a href="https://www.digitalocean.com/community/tutorials/an-introduction-to-selinux-on-centos-7-part-2-files-and-processes">here</a>.</p>
+<p>By default, nginx runs under the SELinux <code>system_u</code> user, the <code>system_r</code> role, and the <code>httpd_t</code> type:</p>
+<pre><code>$ ps -efZ|grep 'nginx'
+system_u:system_r:httpd_t:s0    root     30543     1  0 Apr09 ?        00:00:00 nginx: master process /usr/sbin/nginx
+system_u:system_r:httpd_t:s0    nginx    30544 30543  0 Apr09 ?        00:00:02 nginx: worker process
+system_u:system_r:httpd_t:s0    nginx    30545 30543  0 Apr09 ?        00:00:00 nginx: worker process
+$
+</code></pre><p>Roughly speaking, SELinux compares nginx&rsquo;s user, role, and type against the same values on any value it&rsquo;s trying to access. If the values conflict, SELinux denies access. In the context of &ldquo;I&rsquo;ve got a pile of files I want nginx to serve&rdquo;, this denial manifests as a 403 error. This has caused issues for me repeatedly. genesis generates terrain renders as directories containing html and json files, and during the development and debugging process I just copy these directly into the <code>/var/www</code> directory for my renders.ndumas.com subdomain. Before I discovered the long term fix described below, every one of these new pages was throwing a 404 because this directory and its files did not have the <code>httpd_sys_content_t</code> type set. This caused nginx to be denied permission to read them and a 403 error.</p>
+<p>A correctly set directory looks like this:</p>
+<pre><code>$ ls -Z
+unconfined_u:object_r:httpd_sys_content_t:s0 demo/                 unconfined_u:object_r:user_home_t:s0 sampleTest2/  unconfined_u:object_r:httpd_sys_content_t:s0 test2/
+unconfined_u:object_r:httpd_sys_content_t:s0 sampleTest1/  unconfined_u:object_r:httpd_sys_content_t:s0 test1/
+$
+</code></pre><h1 id="the-solution">The solution<a href="#the-solution" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>There are two solutions to serving static files in this way. You can set the <code>httpd_sys_content_t</code> type for a given directory and its contents, or you can alter SELinux&rsquo;s configuration regarding the access of user files.</p>
+<h2 id="short-term">Short Term<a href="#short-term" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>The short term fix is rather simple: <code>chcon -R -t httpd_sys_content_t /var/www/</code>. This sets a type value on the directory and its contents that tells SELinux that the <code>httpd_t</code> process context can read those files.</p>
+<h2 id="long-term">Long Term<a href="#long-term" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Unfortunately, in the context of my use case, I had to run that <code>chcon</code> invocation every time I generated a new page. I hate manual labor, so I had to find a way to make this stick. Fortunately, <a href="https://stackoverflow.com/questions/22586166/why-does-nginx-return-a-403-even-though-all-permissions-are-set-properly#answer-26228135">StackOverflow</a> had the answer.</p>
+<p>You can tell SELinux &ldquo;httpd processes are allowed to access files owned by other users&rdquo; with the following command: <code>setsebool -P httpd_read_user_content 1</code>. This is pretty straightforward and I confirmed that any content I move into the /var/www directories can now be read by nginx.</p>
+
+      </div></div>
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h">Read other posts</span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      <span class="button previous">
+        <a href="/posts/golang-quantize/">
+          <span class="button__icon">←</span>
+          <span class="button__text">Golang Quantize</span>
+        </a>
+      </span>
+      
+      
+      <span class="button next">
+        <a href="/posts/genesis-flags/">
+          <span class="button__text">Genesis Flags</span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2020 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script src="assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
