@@ -6,8 +6,8 @@ paginate = 5
 googleAnalytics = "UA-113907906-1"
 disqusShortname = "ndumas-com"
 
-pygmentsCodefences  = true
-pygmentsUseClasses  = true
+# pygmentsCodefences  = true
+# pygmentsUseClasses  = true
 
 rssLimit = 10  # Maximum number of items in the RSS feed.
 
