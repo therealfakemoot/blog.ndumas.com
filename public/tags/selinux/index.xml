@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>selinux on code and stuff</title>
-    <link>/tags/selinux/</link>
+    <link>https://ndumas.com/tags/selinux/</link>
     <description>Recent content in selinux on code and stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Nicholas Dumas 2020</copyright>
     <lastBuildDate>Fri, 13 Apr 2018 16:28:20 +0000</lastBuildDate>
     
-	<atom:link href="/tags/selinux/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ndumas.com/tags/selinux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Selinux and Nginx</title>
-      <link>/posts/selinux-and-nginx/</link>
+      <link>https://ndumas.com/posts/selinux-and-nginx/</link>
       <pubDate>Fri, 13 Apr 2018 16:28:20 +0000</pubDate>
       
-      <guid>/posts/selinux-and-nginx/</guid>
+      <guid>https://ndumas.com/posts/selinux-and-nginx/</guid>
       <description>SELinux DigitalOcean&amp;rsquo;s Fedora droplets include SELinux. I don&amp;rsquo;t know a great deal about SELinux but it&amp;rsquo;s presumably a good thing for helping prevent privilege escalations and so on. Unfortunately, it can be troublesome when trying to do simple static site stuff with nginx.
 nginx With Fedora and nginx and selinux all in use simultaneously, you are allowed to tell nginx to serve files that are owned/grouped under a user other than nginx&amp;rsquo;s.</description>
     </item>

@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>genesis on code and stuff</title>
-    <link>/tags/genesis/</link>
+    <link>https://ndumas.com/tags/genesis/</link>
     <description>Recent content in genesis on code and stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Nicholas Dumas 2020</copyright>
     <lastBuildDate>Thu, 28 Feb 2019 19:37:06 +0000</lastBuildDate>
     
-	<atom:link href="/tags/genesis/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ndumas.com/tags/genesis/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Making Noise</title>
-      <link>/posts/making-noise/</link>
+      <link>https://ndumas.com/posts/making-noise/</link>
       <pubDate>Thu, 28 Feb 2019 19:37:06 +0000</pubDate>
       
-      <guid>/posts/making-noise/</guid>
+      <guid>https://ndumas.com/posts/making-noise/</guid>
       <description>The Conceit I&amp;rsquo;ve written about Genesis before, but it&amp;rsquo;s got a lot of complexity attached to it, and the roadmap I originally laid out has shifted a bit. For this post I&amp;rsquo;m focusing solely on Phase 1, the generation of geography. This is obviously a fundamental starting point, and it has roadblocked my progress on Genesis for quite some time ( somewhere on the order of 8 years or so ).</description>
     </item>
     
     <item>
       <title>Genesis Flags</title>
-      <link>/posts/genesis-flags/</link>
+      <link>https://ndumas.com/posts/genesis-flags/</link>
       <pubDate>Sun, 08 Apr 2018 03:44:21 +0000</pubDate>
       
-      <guid>/posts/genesis-flags/</guid>
+      <guid>https://ndumas.com/posts/genesis-flags/</guid>
       <description>Genesis Genesis is a project I’ve spent a great deal of time thinking about and working on for a while with little progress. I’m recycling my old Github blog post because it still highlights the overall design plan. I’ve since altered the project to use Golang instead of CPython. The change is inspired by a desire/need for improved performance, in my view Golang is the perfect tool to accomplish this goal and is the natural next step in my progression as a developer.</description>
     </item>
     
     <item>
       <title>Genesis Roadmap</title>
-      <link>/posts/genesis-roadmap/</link>
+      <link>https://ndumas.com/posts/genesis-roadmap/</link>
       <pubDate>Mon, 03 Jun 2013 00:00:00 +0000</pubDate>
       
-      <guid>/posts/genesis-roadmap/</guid>
+      <guid>https://ndumas.com/posts/genesis-roadmap/</guid>
       <description>Recently, I was working on an idea for a MUD; the general idea was to build a game with detailed &amp;lsquo;inhabited&amp;rsquo; areas such as cities and dungeons as well as expansive wilderness regions for exploring and claiming by players. Naturally, I realized that doing this by hand would be unbearably tedious. A semi-realistic MUD world could contain 4,000,000 rooms; manually creating &amp;ldquo;Meadowy Plains #1421&amp;rdquo; would be error-prone and would drain the creative ability of a human.</description>
     </item>
     

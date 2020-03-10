@@ -2,103 +2,103 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on code and stuff</title>
-    <link>/tags/</link>
+    <link>https://ndumas.com/tags/</link>
     <description>Recent content in Tags on code and stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Nicholas Dumas 2020</copyright>
     <lastBuildDate>Mon, 08 Jul 2019 10:45:07 -0400</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ndumas.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>go</title>
-      <link>/tags/go/</link>
+      <link>https://ndumas.com/tags/go/</link>
       <pubDate>Mon, 08 Jul 2019 10:45:07 -0400</pubDate>
       
-      <guid>/tags/go/</guid>
+      <guid>https://ndumas.com/tags/go/</guid>
       <description></description>
     </item>
     
     <item>
       <title>golang</title>
-      <link>/tags/golang/</link>
+      <link>https://ndumas.com/tags/golang/</link>
       <pubDate>Mon, 08 Jul 2019 10:45:07 -0400</pubDate>
       
-      <guid>/tags/golang/</guid>
+      <guid>https://ndumas.com/tags/golang/</guid>
       <description></description>
     </item>
     
     <item>
       <title>prometheus</title>
-      <link>/tags/prometheus/</link>
+      <link>https://ndumas.com/tags/prometheus/</link>
       <pubDate>Mon, 08 Jul 2019 10:45:07 -0400</pubDate>
       
-      <guid>/tags/prometheus/</guid>
+      <guid>https://ndumas.com/tags/prometheus/</guid>
       <description></description>
     </item>
     
     <item>
       <title>genesis</title>
-      <link>/tags/genesis/</link>
+      <link>https://ndumas.com/tags/genesis/</link>
       <pubDate>Thu, 28 Feb 2019 19:37:06 +0000</pubDate>
       
-      <guid>/tags/genesis/</guid>
+      <guid>https://ndumas.com/tags/genesis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>math</title>
-      <link>/tags/math/</link>
+      <link>https://ndumas.com/tags/math/</link>
       <pubDate>Sun, 22 Apr 2018 17:30:51 +0000</pubDate>
       
-      <guid>/tags/math/</guid>
+      <guid>https://ndumas.com/tags/math/</guid>
       <description></description>
     </item>
     
     <item>
       <title>fedora</title>
-      <link>/tags/fedora/</link>
+      <link>https://ndumas.com/tags/fedora/</link>
       <pubDate>Fri, 13 Apr 2018 16:28:20 +0000</pubDate>
       
-      <guid>/tags/fedora/</guid>
+      <guid>https://ndumas.com/tags/fedora/</guid>
       <description></description>
     </item>
     
     <item>
       <title>nginx</title>
-      <link>/tags/nginx/</link>
+      <link>https://ndumas.com/tags/nginx/</link>
       <pubDate>Fri, 13 Apr 2018 16:28:20 +0000</pubDate>
       
-      <guid>/tags/nginx/</guid>
+      <guid>https://ndumas.com/tags/nginx/</guid>
       <description></description>
     </item>
     
     <item>
       <title>selinux</title>
-      <link>/tags/selinux/</link>
+      <link>https://ndumas.com/tags/selinux/</link>
       <pubDate>Fri, 13 Apr 2018 16:28:20 +0000</pubDate>
       
-      <guid>/tags/selinux/</guid>
+      <guid>https://ndumas.com/tags/selinux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Code</title>
-      <link>/tags/code/</link>
+      <link>https://ndumas.com/tags/code/</link>
       <pubDate>Sat, 10 Feb 2018 23:24:24 +0000</pubDate>
       
-      <guid>/tags/code/</guid>
+      <guid>https://ndumas.com/tags/code/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Site Updates</title>
-      <link>/tags/site-updates/</link>
+      <link>https://ndumas.com/tags/site-updates/</link>
       <pubDate>Sat, 10 Feb 2018 23:24:24 +0000</pubDate>
       
-      <guid>/tags/site-updates/</guid>
+      <guid>https://ndumas.com/tags/site-updates/</guid>
       <description></description>
     </item>
     
