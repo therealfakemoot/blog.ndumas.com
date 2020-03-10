@@ -49,7 +49,7 @@ rssLimit = 10  # Maximum number of items in the RSS feed.
     copyright = "Nicholas Dumas 2020"
     menuMore = "Show more"
     readMore = "Read more"
-    readOtherPosts = "Read other posts"
+    readOtherPosts = "explore"
 
     [languages.en.params.logo]
       logoText = "digital wizardry"
