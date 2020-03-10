@@ -174,158 +174,158 @@ Quantizing OpenSimplex My use case is a little less straightforward." />
 [-1 1 -2 -2 -3 -3 3 0 -4 -6 -2 -3 3 -7 -1 1 -4 -4 -1 2 0 5 -1 0 2]
 </code></pre><p>Unfortunately, my current implementation is outputting values outside the provided domain. it almost looks like the output is twice what it should be, but I know that doing things incorrectly and just dividing by 2 afterwards isn&rsquo;t sufficient. I&rsquo;ve got relatively few leads at the moment, but I&rsquo;m not giving up.</p>
 <h1 id="the-code">The Code<a href="#the-code" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
 </span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<span class="kn">import</span> <span class="p">(</span>
-        <span class="s">&#34;fmt&#34;</span>
-        <span class="nx">noise</span> <span class="s">&#34;github.com/therealfakemoot/genesis/noise&#34;</span>
-        <span class="c1">// &#34;math&#34;
-</span><span class="c1"></span>        <span class="c1">// &#34;math/rand&#34;
-</span><span class="c1"></span><span class="p">)</span>
+<span style="color:#f92672">import</span> (
+        <span style="color:#e6db74">&#34;fmt&#34;</span>
+        <span style="color:#a6e22e">noise</span> <span style="color:#e6db74">&#34;github.com/therealfakemoot/genesis/noise&#34;</span>
+        <span style="color:#75715e">// &#34;math&#34;
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// &#34;math/rand&#34;
+</span><span style="color:#75715e"></span>)
 
-<span class="c1">// Domain describes the integer space to which float values must be mapped.
-</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Domain</span> <span class="kd">struct</span> <span class="p">{</span>
-        <span class="nx">Min</span>  <span class="kt">float64</span>
-        <span class="nx">Max</span>  <span class="kt">float64</span>
-        <span class="nx">Step</span> <span class="kt">float64</span>
-<span class="p">}</span>
+<span style="color:#75715e">// Domain describes the integer space to which float values must be mapped.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Domain</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">Min</span>  <span style="color:#66d9ef">float64</span>
+        <span style="color:#a6e22e">Max</span>  <span style="color:#66d9ef">float64</span>
+        <span style="color:#a6e22e">Step</span> <span style="color:#66d9ef">float64</span>
+}
 
-<span class="c1">// func quantize(delta float64, i float64) float64 {
-</span><span class="c1">// return delta * math.Floor((i/delta)+.5)
-</span><span class="c1">// }
-</span><span class="c1"></span>
-<span class="kd">func</span> <span class="nf">quantize</span><span class="p">(</span><span class="nx">steps</span> <span class="kt">float64</span><span class="p">,</span> <span class="nx">x</span> <span class="kt">float64</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="nx">x</span> <span class="o">&gt;=</span> <span class="mf">0.5</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nx">x</span><span class="o">*</span><span class="nx">steps</span> <span class="o">+</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nx">x</span><span class="o">*</span><span class="p">(</span><span class="nx">steps</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<span class="p">}</span>
+<span style="color:#75715e">// func quantize(delta float64, i float64) float64 {
+</span><span style="color:#75715e">// return delta * math.Floor((i/delta)+.5)
+</span><span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">quantize</span>(<span style="color:#a6e22e">steps</span> <span style="color:#66d9ef">float64</span>, <span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">int</span> {
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0.5</span> {
+                <span style="color:#66d9ef">return</span> int(<span style="color:#a6e22e">x</span><span style="color:#f92672">*</span><span style="color:#a6e22e">steps</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>)
+        }
+        <span style="color:#66d9ef">return</span> int(<span style="color:#a6e22e">x</span><span style="color:#f92672">*</span>(<span style="color:#a6e22e">steps</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+}
 
-<span class="c1">// Quantize normalizes a given set of arbitrary inputs into the provided output Domain.
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">Quantize</span><span class="p">(</span><span class="nx">d</span> <span class="nx">Domain</span><span class="p">,</span> <span class="nx">fs</span> <span class="p">[]</span><span class="kt">float64</span><span class="p">)</span> <span class="p">[]</span><span class="kt">int</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">ret</span> <span class="p">[]</span><span class="kt">int</span>
-        <span class="kd">var</span> <span class="nx">steps</span> <span class="p">[]</span><span class="kt">float64</span>
+<span style="color:#75715e">// Quantize normalizes a given set of arbitrary inputs into the provided output Domain.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Quantize</span>(<span style="color:#a6e22e">d</span> <span style="color:#a6e22e">Domain</span>, <span style="color:#a6e22e">fs</span> []<span style="color:#66d9ef">float64</span>) []<span style="color:#66d9ef">int</span> {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ret</span> []<span style="color:#66d9ef">int</span>
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">steps</span> []<span style="color:#66d9ef">float64</span>
 
-        <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">Min</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">Max</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">Step</span> <span class="p">{</span>
-                <span class="nx">steps</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">steps</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span>
-        <span class="p">}</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">Min</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">Max</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">Step</span> {
+                <span style="color:#a6e22e">steps</span> = append(<span style="color:#a6e22e">steps</span>, <span style="color:#a6e22e">i</span>)
+        }
 
-        <span class="nx">stepFloat</span> <span class="o">:=</span> <span class="nb">float64</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">steps</span><span class="p">))</span>
-        <span class="c1">// quantaSize := (d.Max - d.Min) / (math.Pow(2.0, stepFloat) - 1.0)
-</span><span class="c1"></span>
-        <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">f</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">fs</span> <span class="p">{</span>
-                <span class="nx">ret</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">ret</span><span class="p">,</span> <span class="nf">quantize</span><span class="p">(</span><span class="nx">stepFloat</span><span class="p">,</span> <span class="nx">f</span><span class="p">))</span>
-        <span class="p">}</span>
+        <span style="color:#a6e22e">stepFloat</span> <span style="color:#f92672">:=</span> float64(len(<span style="color:#a6e22e">steps</span>))
+        <span style="color:#75715e">// quantaSize := (d.Max - d.Min) / (math.Pow(2.0, stepFloat) - 1.0)
+</span><span style="color:#75715e"></span>
+        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">f</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">fs</span> {
+                <span style="color:#a6e22e">ret</span> = append(<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">quantize</span>(<span style="color:#a6e22e">stepFloat</span>, <span style="color:#a6e22e">f</span>))
+        }
 
-        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Steps: %v\n&#34;</span><span class="p">,</span> <span class="nx">steps</span><span class="p">)</span>
-        <span class="c1">// fmt.Printf(&#34;Quanta size: %f\n&#34;, quantaSize)
-</span><span class="c1"></span>
-        <span class="k">return</span> <span class="nx">ret</span>
-<span class="p">}</span>
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Steps: %v\n&#34;</span>, <span style="color:#a6e22e">steps</span>)
+        <span style="color:#75715e">// fmt.Printf(&#34;Quanta size: %f\n&#34;, quantaSize)
+</span><span style="color:#75715e"></span>
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ret</span>
+}
 
-<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">d</span> <span class="o">:=</span> <span class="nx">Domain</span><span class="p">{</span>
-                <span class="nx">Min</span><span class="p">:</span>  <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span>
-                <span class="nx">Max</span><span class="p">:</span>  <span class="mf">5.0</span><span class="p">,</span>
-                <span class="nx">Step</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-        <span class="p">}</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+        <span style="color:#a6e22e">d</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Domain</span>{
+                <span style="color:#a6e22e">Min</span>:  <span style="color:#f92672">-</span><span style="color:#ae81ff">5.0</span>,
+                <span style="color:#a6e22e">Max</span>:  <span style="color:#ae81ff">5.0</span>,
+                <span style="color:#a6e22e">Step</span>: <span style="color:#ae81ff">1.0</span>,
+        }
 
-        <span class="nx">n</span> <span class="o">:=</span> <span class="nx">noise</span><span class="p">.</span><span class="nf">NewWithSeed</span><span class="p">(</span><span class="mi">8675309</span><span class="p">)</span>
+        <span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">noise</span>.<span style="color:#a6e22e">NewWithSeed</span>(<span style="color:#ae81ff">8675309</span>)
 
-        <span class="kd">var</span> <span class="nx">fs</span> <span class="p">[]</span><span class="kt">float64</span>
-        <span class="k">for</span> <span class="nx">x</span> <span class="o">:=</span> <span class="mf">0.0</span><span class="p">;</span> <span class="nx">x</span> <span class="p">&lt;</span> <span class="mf">10.0</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span> <span class="p">{</span>
-                <span class="k">for</span> <span class="nx">y</span> <span class="o">:=</span> <span class="mf">0.0</span><span class="p">;</span> <span class="nx">y</span> <span class="p">&lt;</span> <span class="mf">10.0</span><span class="p">;</span> <span class="nx">y</span><span class="o">++</span> <span class="p">{</span>
-                        <span class="nx">fs</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">fs</span><span class="p">,</span> <span class="nx">n</span><span class="p">.</span><span class="nf">Eval3</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-                <span class="p">}</span>
-        <span class="p">}</span>
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fs</span> []<span style="color:#66d9ef">float64</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0.0</span>; <span style="color:#a6e22e">x</span> &lt; <span style="color:#ae81ff">10.0</span>; <span style="color:#a6e22e">x</span><span style="color:#f92672">++</span> {
+                <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">y</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0.0</span>; <span style="color:#a6e22e">y</span> &lt; <span style="color:#ae81ff">10.0</span>; <span style="color:#a6e22e">y</span><span style="color:#f92672">++</span> {
+                        <span style="color:#a6e22e">fs</span> = append(<span style="color:#a6e22e">fs</span>, <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">Eval3</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>, <span style="color:#ae81ff">0</span>))
+                }
+        }
 
-        <span class="c1">// for i := 0; i &lt; 20; i++ {
-</span><span class="c1"></span>        <span class="c1">// fs = append(fs, rand.Float64())
-</span><span class="c1"></span>        <span class="c1">// }
-</span><span class="c1"></span>
-        <span class="nx">v</span> <span class="o">:=</span> <span class="nf">Quantize</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">fs</span><span class="p">)</span>
+        <span style="color:#75715e">// for i := 0; i &lt; 20; i++ {
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// fs = append(fs, rand.Float64())
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>
+        <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Quantize</span>(<span style="color:#a6e22e">d</span>, <span style="color:#a6e22e">fs</span>)
 
-        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%v\n&#34;</span><span class="p">,</span> <span class="nx">fs</span><span class="p">)</span>
-        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%v\n&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%v\n&#34;</span>, <span style="color:#a6e22e">fs</span>)
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%v\n&#34;</span>, <span style="color:#a6e22e">v</span>)
+}</code></pre></td></tr></table>
 </div>
 </div>
 
@@ -334,7 +334,7 @@ Quantizing OpenSimplex My use case is a little less straightforward." />
   <div class="pagination">
     <div class="pagination__title">
       <span
-        class="pagination__title-h">Read other posts</span>
+        class="pagination__title-h">explore</span>
       <hr />
     </div>
     <div class="pagination__buttons">

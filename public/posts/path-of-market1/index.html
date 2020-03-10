@@ -175,116 +175,116 @@ Stashes Each character has a set of &amp;ldquo;stashes&amp;rdquo;. These are sto
 <h1 id="first-steps">First Steps<a href="#first-steps" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>Obviously, the first step is talking to the official Path of Exile API and getting these stashes into a format that I can work with programmatically. The JSON payload was moderately complex, but with the help of some <a href="https://mholt.github.io/json-to-go/">tooling</a> and unit testing I was able to build out some Go structs that contained all the metadata available.</p>
 <p>A particularly fun challenge was this one, describing how &ldquo;gem&rdquo; items could be slotted into an item. This was a challenge because the API can return either a string <em>or</em> a boolean for a specific set of fields. This is, in my opinion, not as &ldquo;well behaved&rdquo; API but you don&rsquo;t always get the luxury of working with ones that are well behaved. This unmarshaling solution helps account for this inconsistency and populates the relevant fields accordingly.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
 </span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">SocketAttr</span> <span class="kd">struct</span> <span class="p">{</span>
-        <span class="nx">Type</span>  <span class="kt">string</span>
-        <span class="nx">Abyss</span> <span class="kt">bool</span>
-<span class="p">}</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">SocketAttr</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">Type</span>  <span style="color:#66d9ef">string</span>
+        <span style="color:#a6e22e">Abyss</span> <span style="color:#66d9ef">bool</span>
+}
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">sa</span> <span class="o">*</span><span class="nx">SocketAttr</span><span class="p">)</span> <span class="nf">UnmarshalJSON</span><span class="p">(</span><span class="nx">data</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">val</span> <span class="kd">interface</span><span class="p">{}</span>
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">sa</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SocketAttr</span>) <span style="color:#a6e22e">UnmarshalJSON</span>(<span style="color:#a6e22e">data</span> []<span style="color:#66d9ef">byte</span>) <span style="color:#66d9ef">error</span> {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">val</span> <span style="color:#66d9ef">interface</span>{}
 
-        <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">val</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">err</span>
-        <span class="p">}</span>
+        <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Unmarshal</span>(<span style="color:#a6e22e">data</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">val</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+                <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+        }
 
-        <span class="k">switch</span> <span class="nx">val</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">case</span> <span class="kt">string</span><span class="p">:</span>
-                <span class="nx">sa</span><span class="p">.</span><span class="nx">Type</span> <span class="p">=</span> <span class="nx">val</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span>
-        <span class="k">case</span> <span class="kt">bool</span><span class="p">:</span>
-                <span class="nx">sa</span><span class="p">.</span><span class="nx">Abyss</span> <span class="p">=</span> <span class="nx">val</span><span class="p">.(</span><span class="kt">bool</span><span class="p">)</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="kc">nil</span>
-<span class="p">}</span>
+        <span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">val</span>.(<span style="color:#66d9ef">type</span>) {
+        <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">string</span>:
+                <span style="color:#a6e22e">sa</span>.<span style="color:#a6e22e">Type</span> = <span style="color:#a6e22e">val</span>.(<span style="color:#66d9ef">string</span>)
+        <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">bool</span>:
+                <span style="color:#a6e22e">sa</span>.<span style="color:#a6e22e">Abyss</span> = <span style="color:#a6e22e">val</span>.(<span style="color:#66d9ef">bool</span>)
+        }
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+}
 
-<span class="kd">type</span> <span class="nx">SocketColour</span> <span class="kd">struct</span> <span class="p">{</span>
-        <span class="nx">Colour</span> <span class="kt">string</span>
-        <span class="nx">Abyss</span>  <span class="kt">bool</span>
-<span class="p">}</span>
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">SocketColour</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">Colour</span> <span style="color:#66d9ef">string</span>
+        <span style="color:#a6e22e">Abyss</span>  <span style="color:#66d9ef">bool</span>
+}
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">sc</span> <span class="o">*</span><span class="nx">SocketColour</span><span class="p">)</span> <span class="nf">UnmarshalJSON</span><span class="p">(</span><span class="nx">data</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">val</span> <span class="kd">interface</span><span class="p">{}</span>
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">sc</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SocketColour</span>) <span style="color:#a6e22e">UnmarshalJSON</span>(<span style="color:#a6e22e">data</span> []<span style="color:#66d9ef">byte</span>) <span style="color:#66d9ef">error</span> {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">val</span> <span style="color:#66d9ef">interface</span>{}
 
-        <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">val</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">err</span>
-        <span class="p">}</span>
+        <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Unmarshal</span>(<span style="color:#a6e22e">data</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">val</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+                <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+        }
 
-        <span class="k">switch</span> <span class="nx">val</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">case</span> <span class="kt">string</span><span class="p">:</span>
-                <span class="nx">sc</span><span class="p">.</span><span class="nx">Colour</span> <span class="p">=</span> <span class="nx">val</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span>
-        <span class="k">case</span> <span class="kt">bool</span><span class="p">:</span>
-                <span class="nx">sc</span><span class="p">.</span><span class="nx">Abyss</span> <span class="p">=</span> <span class="nx">val</span><span class="p">.(</span><span class="kt">bool</span><span class="p">)</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="kc">nil</span>
-<span class="p">}</span></code></pre></td></tr></table>
+        <span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">val</span>.(<span style="color:#66d9ef">type</span>) {
+        <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">string</span>:
+                <span style="color:#a6e22e">sc</span>.<span style="color:#a6e22e">Colour</span> = <span style="color:#a6e22e">val</span>.(<span style="color:#66d9ef">string</span>)
+        <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">bool</span>:
+                <span style="color:#a6e22e">sc</span>.<span style="color:#a6e22e">Abyss</span> = <span style="color:#a6e22e">val</span>.(<span style="color:#66d9ef">bool</span>)
+        }
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+}</code></pre></td></tr></table>
 </div>
 </div>
 <p>With that done, I had passing tests that parsed a variety of sample items I had manually extracted from the API. Next was turning these into a &ldquo;stream&rdquo; that I could process. Channels seemed like a natural fit for this task; the API did not guarantee any number of results at any time and only declares that you periodically request the last ID you were given by the API.</p>
 <p>The full code is <a href="https://github.com/therealfakemoot/pom/blob/master/poe/client.go">here</a>, but I&rsquo;ll highlight the parts that are interesting, and not standard issue HTTP client fare.</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go">		<span class="nx">d</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">NewDecoder</span><span class="p">(</span><span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
-		<span class="nx">err</span> <span class="p">=</span> <span class="nx">d</span><span class="p">.</span><span class="nf">Decode</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">e</span><span class="p">)</span>
-		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-			<span class="nx">sa</span><span class="p">.</span><span class="nx">Err</span> <span class="o">&lt;-</span> <span class="nx">StreamError</span><span class="p">{</span>
-				<span class="nx">PageID</span><span class="p">:</span> <span class="nx">sa</span><span class="p">.</span><span class="nx">NextID</span><span class="p">,</span>
-				<span class="nx">Err</span><span class="p">:</span>    <span class="nx">err</span><span class="p">,</span>
-			<span class="p">}</span>
-			<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;error decoding envelope: %s&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-			<span class="k">continue</span>
-		<span class="p">}</span>
-		<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;next page ID: %s&#34;</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">NextChangeID</span><span class="p">)</span>
-		<span class="nx">sa</span><span class="p">.</span><span class="nx">NextID</span> <span class="p">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">NextChangeID</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">		<span style="color:#a6e22e">d</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">NewDecoder</span>(<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">Body</span>)
+		<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">Decode</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">e</span>)
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">sa</span>.<span style="color:#a6e22e">Err</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">StreamError</span>{
+				<span style="color:#a6e22e">PageID</span>: <span style="color:#a6e22e">sa</span>.<span style="color:#a6e22e">NextID</span>,
+				<span style="color:#a6e22e">Err</span>:    <span style="color:#a6e22e">err</span>,
+			}
+			<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;error decoding envelope: %s&#34;</span>, <span style="color:#a6e22e">err</span>)
+			<span style="color:#66d9ef">continue</span>
+		}
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;next page ID: %s&#34;</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">NextChangeID</span>)
+		<span style="color:#a6e22e">sa</span>.<span style="color:#a6e22e">NextID</span> = <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">NextChangeID</span>
 
-		<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">stash</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">e</span><span class="p">.</span><span class="nx">Stashes</span> <span class="p">{</span>
-			<span class="nx">sa</span><span class="p">.</span><span class="nx">Stashes</span> <span class="o">&lt;-</span> <span class="nx">stash</span>
-		<span class="p">}</span></code></pre></div>
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">stash</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Stashes</span> {
+			<span style="color:#a6e22e">sa</span>.<span style="color:#a6e22e">Stashes</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">stash</span>
+		}</code></pre></div>
 <p>This snippet is where the magic happens. JSON gets decoded, errors are pushed into a channel for processing. Finally, stashes are pushed into a channel to be consumed outside inside the main loop. And here&rsquo;s where I&rsquo;ll leave off for now. There&rsquo;s quite a bit more code to cover, and I&rsquo;m still refactoring pieces of it relatively frequently, so I don&rsquo;t want to write too much about things that I expect to change.</p>
 
       </div></div>
@@ -292,7 +292,7 @@ Stashes Each character has a set of &amp;ldquo;stashes&amp;rdquo;. These are sto
   <div class="pagination">
     <div class="pagination__title">
       <span
-        class="pagination__title-h">Read other posts</span>
+        class="pagination__title-h">explore</span>
       <hr />
     </div>
     <div class="pagination__buttons">

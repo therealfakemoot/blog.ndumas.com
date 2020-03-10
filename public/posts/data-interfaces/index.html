@@ -157,87 +157,87 @@ if (!doNotTrack) {
   <div class="post-content"><div>
         <h1 id="interfaces">interfaces<a href="#interfaces" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>I&rsquo;m a fan of Go&rsquo;s interfaces. They&rsquo;re really simple and don&rsquo;t require a lot of legwork.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Mover</span> <span class="kd">interface</span> <span class="p">{</span>
-  <span class="kd">func</span> <span class="nf">Move</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span>
-<span class="p">}</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Mover</span> <span style="color:#66d9ef">interface</span> {
+  <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Move</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>) (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>)
+}
 
-<span class="kd">type</span> <span class="nx">Dog</span> <span class="kd">struct</span> <span class="p">{</span>
-  <span class="nx">Name</span> <span class="kt">string</span>
-<span class="p">}</span>
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Dog</span> <span style="color:#66d9ef">struct</span> {
+  <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span>
+}
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="nx">Dog</span><span class="p">)</span> <span class="nf">Move</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#a6e22e">Dog</span>) <span style="color:#a6e22e">Move</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>) (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>
+}</code></pre></td></tr></table>
 </div>
 </div>
 <p>Dog is now a Mover! No need for keywords like <code>implements</code>. The compiler just checks at the various boundaries in your app, like struct definitions and function signatures.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Map</span> <span class="kd">struct</span> <span class="p">{</span>
-  <span class="nx">Actors</span> <span class="p">[]</span><span class="nx">Mover</span>
-<span class="p">}</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Map</span> <span style="color:#66d9ef">struct</span> {
+  <span style="color:#a6e22e">Actors</span> []<span style="color:#a6e22e">Mover</span>
+}
 
-<span class="kd">func</span> <span class="nf">something</span><span class="p">(</span><span class="nx">m</span> <span class="nx">Mover</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span><span class="nx">y</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
-  <span class="c1">// do something
-</span><span class="c1"></span><span class="p">}</span></code></pre></td></tr></table>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">something</span>(<span style="color:#a6e22e">m</span> <span style="color:#a6e22e">Mover</span>, <span style="color:#a6e22e">x</span>,<span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> {
+  <span style="color:#75715e">// do something
+</span><span style="color:#75715e"></span>}</code></pre></td></tr></table>
 </div>
 </div>
 <h1 id="functionality-vs-data">Functionality vs Data<a href="#functionality-vs-data" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>This is where things get tricky. Interfaces describe <em>functionality</em>. What if you want the compiler to enforce the existence of specific members of a struct? I encountered this problem in a project of mine recently and I&rsquo;ll use it as a case study for a few possible solutions.</p>
 <h2 id="concrete-types">Concrete Types<a href="#concrete-types" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>If your only expectation is that the compiler enforce the existence of specific struct members, specifying a concrete type works nicely.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Issue</span> <span class="kd">struct</span> <span class="p">{</span>
-        <span class="nx">Key</span>     <span class="kt">string</span>
-        <span class="nx">Title</span>   <span class="kt">string</span>
-        <span class="nx">Created</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
-        <span class="nx">Updated</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
-        <span class="nx">Body</span>    <span class="kt">string</span>
-        <span class="nx">Attrs</span>   <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">][]</span><span class="kt">string</span>
-<span class="p">}</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Issue</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">Key</span>     <span style="color:#66d9ef">string</span>
+        <span style="color:#a6e22e">Title</span>   <span style="color:#66d9ef">string</span>
+        <span style="color:#a6e22e">Created</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Time</span>
+        <span style="color:#a6e22e">Updated</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Time</span>
+        <span style="color:#a6e22e">Body</span>    <span style="color:#66d9ef">string</span>
+        <span style="color:#a6e22e">Attrs</span>   <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>][]<span style="color:#66d9ef">string</span>
+}
 
-<span class="kd">type</span> <span class="nx">IssueService</span> <span class="kd">interface</span> <span class="p">{</span>
-        <span class="nf">Get</span><span class="p">()</span> <span class="p">[]</span><span class="nx">Issue</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">IssueService</span> <span style="color:#66d9ef">interface</span> {
+        <span style="color:#a6e22e">Get</span>() []<span style="color:#a6e22e">Issue</span>
+}</code></pre></td></tr></table>
 </div>
 </div>
 <p>There&rsquo;s a few benefits to this. Because Go will automatically zero out all members of a struct on initialization, one only has to fill in what you explicitly want or need to provide. For example, the <code>Issue</code> type may represent a Jira ticket, or a Gitlab ticket, or possibly something as simple as lines in a TODO.txt file in a project&rsquo;s root directory.</p>
@@ -245,36 +245,36 @@ if (!doNotTrack) {
 <p>Where this falls apart, though, is when you want to allow for flexible/arbitrary implementations of functionality while still enforcing presence of &ldquo;data&rdquo; members.</p>
 <h2 id="composition">Composition<a href="#composition" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>I think the correct solution involves breaking your struct apart: you have the <code>Data</code> and the <code>Thinger</code> that needs the data. Instead of making <code>Issue</code> itself have methods, <code>Issue</code> can have a member that satisfies a given interface. This seems to offer the best of both worlds. You don&rsquo;t lose type safety, while allowing consumers of your API to plug-and-play their own concrete implementations of functionality while still respecting your requirements.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
 </span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Issue</span> <span class="kd">struct</span> <span class="p">{</span>
-        <span class="nx">Key</span>     <span class="kt">string</span>
-        <span class="nx">Title</span>   <span class="kt">string</span>
-        <span class="nx">Created</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
-        <span class="nx">Updated</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
-        <span class="nx">Body</span>    <span class="kt">string</span>
-        <span class="nx">Checker</span> <span class="nx">IssueChecker</span>
-        <span class="nx">Attrs</span>   <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">][]</span><span class="kt">string</span>
-<span class="p">}</span>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Issue</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">Key</span>     <span style="color:#66d9ef">string</span>
+        <span style="color:#a6e22e">Title</span>   <span style="color:#66d9ef">string</span>
+        <span style="color:#a6e22e">Created</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Time</span>
+        <span style="color:#a6e22e">Updated</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Time</span>
+        <span style="color:#a6e22e">Body</span>    <span style="color:#66d9ef">string</span>
+        <span style="color:#a6e22e">Checker</span> <span style="color:#a6e22e">IssueChecker</span>
+        <span style="color:#a6e22e">Attrs</span>   <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>][]<span style="color:#66d9ef">string</span>
+}
 
-<span class="kd">type</span> <span class="nx">IssueChecker</span> <span class="kd">interface</span> <span class="p">{</span>
-        <span class="nf">Check</span><span class="p">(</span><span class="nx">Issue</span><span class="p">)</span> <span class="kt">bool</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">IssueChecker</span> <span style="color:#66d9ef">interface</span> {
+        <span style="color:#a6e22e">Check</span>(<span style="color:#a6e22e">Issue</span>) <span style="color:#66d9ef">bool</span>
+}</code></pre></td></tr></table>
 </div>
 </div>
 
@@ -283,7 +283,7 @@ if (!doNotTrack) {
   <div class="pagination">
     <div class="pagination__title">
       <span
-        class="pagination__title-h">Read other posts</span>
+        class="pagination__title-h">explore</span>
       <hr />
     </div>
     <div class="pagination__buttons">

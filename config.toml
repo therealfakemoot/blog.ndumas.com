@@ -47,8 +47,8 @@ rssLimit = 10  # Maximum number of items in the RSS feed.
     subtitle = "sometimes i make stuff"
     keywords = ""
     copyright = "Nicholas Dumas 2020"
-    menuMore = "Show more"
-    readMore = "Read more"
+    menuMore = "lemme see"
+    readMore = "read more"
     readOtherPosts = "explore"
 
     [languages.en.params.logo]
