@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   
-    <title>Genesis Flags :: code and stuff — sometimes i make stuff</title>
+    <title>Genesis Flags :: code and stuff</title>
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Genesis Genesis is a project I’ve spent a great deal of time thinking about and working on for a while with little progress. I’m recycling my old Github blog post because it still highlights the overall design plan. I’ve since altered the project to use Golang instead of CPython. The change is inspired by a desire/need for improved performance, in my view Golang is the perfect tool to accomplish this goal and is the natural next step in my progression as a developer." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
@@ -26,10 +26,9 @@ if (!doNotTrack) {
 </script>
 
 
-
 <link rel="stylesheet" href="https://ndumas.com/assets/style.css">
 
-  <link rel="stylesheet" href="https://ndumas.com/assets/blue.css">
+  <link rel="stylesheet" href="https://ndumas.com/assets/green.css">
 
 
 
@@ -38,13 +37,12 @@ if (!doNotTrack) {
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ndumas.com/img/apple-touch-icon-144-precomposed.png">
 
-  <link rel="shortcut icon" href="https://ndumas.com/img/favicon/blue.png">
+  <link rel="shortcut icon" href="https://ndumas.com/img/favicon/green.png">
 
 
 
 <meta name="twitter:card" content="summary" />
 
-<meta name="twitter:creator" content="" />
 
 
 <meta property="og:locale" content="en" />
@@ -55,7 +53,7 @@ if (!doNotTrack) {
 <meta property="og:site_name" content="Genesis Flags" />
 
   
-    <meta property="og:image" content="https://ndumas.com/img/favicon/blue.png">
+    <meta property="og:image" content="https://ndumas.com/img/favicon/green.png">
   
 
 <meta property="og:image:width" content="2048">
@@ -76,7 +74,7 @@ if (!doNotTrack) {
 
 
 </head>
-<body class="">
+<body class="green">
 
 
 <div class="container full headings--one-size">
@@ -99,11 +97,11 @@ if (!doNotTrack) {
     
       
         
-          <li><a href="/about-me">About</a></li>
+          <li><a href="ndumas.com">About</a></li>
         
       
         
-          <li><a href="/portfolio">Portfolio</a></li>
+          <li><a href="portfolio.ndumas.com">Portfolio</a></li>
         
       
       
@@ -115,11 +113,11 @@ if (!doNotTrack) {
   <ul class="menu__inner menu__inner--mobile">
     
       
-        <li><a href="/about-me">About</a></li>
+        <li><a href="ndumas.com">About</a></li>
       
     
       
-        <li><a href="/portfolio">Portfolio</a></li>
+        <li><a href="portfolio.ndumas.com">Portfolio</a></li>
       
     
     
@@ -136,10 +134,10 @@ if (!doNotTrack) {
   <h1 class="post-title">
     <a href="https://ndumas.com/posts/genesis-flags/">Genesis Flags</a></h1>
   <div class="post-meta">
-      
-    <span class="post-date">
-      2018-04-08
-    </span>
+    
+      <span class="post-date">
+        2018-04-08 
+      </span>
     
     
   </div>
@@ -152,6 +150,8 @@ if (!doNotTrack) {
     #<a href="https://ndumas.com/tags/golang/">golang</a>&nbsp;
     
   </span>
+  
+
   
 
   
@@ -179,35 +179,37 @@ if (!doNotTrack) {
 <p>My failing here is rather specific. <code>cobra</code> by default recommends using the <code>init()</code> function of each command file to perform your <a href="https://github.com/therealfakemoot/genesis/blob/da7e9c39e8e443df7d2de23ab1172ce5b3a100ff/cmd/root.go#L49-L63">flag setup</a>. On line 62, you can see my invocation of <code>BindPFlags</code>. The code I inserted to test whether <code>viper</code> was successfully pulling these values was also included in the same <code>init()</code> method. After some discussion with Tyler B, I had to re-read every single line of code and eventually realize that when <code>init()</code> is called <code>cobra</code> hasn&rsquo;t actually parsed any command line values!</p>
 <p>In addition to the change from <code>PersistentFlag</code> to <code>Flag</code> values, I moved my debug code <em>inside</em> of the <code>cobra</code> <a href="https://github.com/therealfakemoot/genesis/blob/da7e9c39e8e443df7d2de23ab1172ce5b3a100ff/cmd/root.go#L21-L25">command hooks</a> and found that configuration file values were being read correctly (as they always had been) <em>and</em> when an identically named command-line flag was passed, <code>viper</code> presented the overriding value correctly.</p>
 <h1 id="summary">Summary<a href="#summary" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
-<p>This series of misunderstanding and error in logic roadblocked my work on <code>genesis</code> for far longer than I&rsquo;m proud to admit; efficient, effective, and sane configuration/parameterization is a key non-neogitable feature of this project. Any attempts to move forward with hacked-in or &lsquo;magic number&rsquo; style parameters would be brittle and have to be dismantled (presumably painfully) at some point in the future. Thanks to Tyler, I was able to break through my improper grasp of the tools I was using and reach a point where I can approach implementing the more &lsquo;tangible&rsquo; portions of the project such as generating terrain maps, accomplishing everything from rendering them to even starting to reason out something like a graphical interface.</p>
+<p>This series of misunderstanding and error in logic roadblocked my work on <code>genesis</code> for far longer than I&rsquo;m proud to admit; efficient, effective, and sane configuration/parameterization is a key non-neogitable feature of this project. Any attempts to move forward with hacked-in or &lsquo;magic number&rsquo; style parameters would be brittle and have to be dismantled (presumably painfully) at some point in the future. Thanks to Tyler, I was able to break through my improper grasp of the tools I was using and reach a point where I can approach implementing the more &rsquo;tangible&rsquo; portions of the project such as generating terrain maps, accomplishing everything from rendering them to even starting to reason out something like a graphical interface.</p>
 
       </div></div>
+
   
-  <div class="pagination">
+  
+<div class="pagination">
     <div class="pagination__title">
-      <span
-        class="pagination__title-h">explore</span>
-      <hr />
+        <span class="pagination__title-h">explore</span>
+        <hr />
     </div>
     <div class="pagination__buttons">
-      
-      <span class="button previous">
-        <a href="https://ndumas.com/posts/selinux-and-nginx/">
-          <span class="button__icon">←</span>
-          <span class="button__text">Selinux and Nginx</span>
-        </a>
-      </span>
-      
-      
-      <span class="button next">
-        <a href="https://ndumas.com/posts/standing-up-gogs/">
-          <span class="button__text">Standing Up Gogs</span>
-          <span class="button__icon">→</span>
-        </a>
-      </span>
-      
+        
+        <span class="button previous">
+            <a href="https://ndumas.com/posts/selinux-and-nginx/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Selinux and Nginx</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://ndumas.com/posts/standing-up-gogs/">
+                <span class="button__text">Standing Up Gogs</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
     </div>
-  </div>
+</div>
+
   
 
   
@@ -221,7 +223,7 @@ if (!doNotTrack) {
   <div class="footer__inner">
     
       <div class="copyright copyright--user">
-        <span>Nicholas Dumas 2020</span>
+        <span>Nicholas Dumas 2022</span>
     
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>

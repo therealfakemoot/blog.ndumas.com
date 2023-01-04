@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   
-    <title>Selinux and Nginx :: code and stuff — sometimes i make stuff</title>
+    <title>Selinux and Nginx :: code and stuff</title>
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="SELinux DigitalOcean&amp;rsquo;s Fedora droplets include SELinux. I don&amp;rsquo;t know a great deal about SELinux but it&amp;rsquo;s presumably a good thing for helping prevent privilege escalations and so on. Unfortunately, it can be troublesome when trying to do simple static site stuff with nginx.
 nginx With Fedora and nginx and selinux all in use simultaneously, you are allowed to tell nginx to serve files that are owned/grouped under a user other than nginx&amp;rsquo;s." />
 <meta name="keywords" content="" />
@@ -27,10 +27,9 @@ if (!doNotTrack) {
 </script>
 
 
-
 <link rel="stylesheet" href="https://ndumas.com/assets/style.css">
 
-  <link rel="stylesheet" href="https://ndumas.com/assets/blue.css">
+  <link rel="stylesheet" href="https://ndumas.com/assets/green.css">
 
 
 
@@ -39,13 +38,12 @@ if (!doNotTrack) {
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ndumas.com/img/apple-touch-icon-144-precomposed.png">
 
-  <link rel="shortcut icon" href="https://ndumas.com/img/favicon/blue.png">
+  <link rel="shortcut icon" href="https://ndumas.com/img/favicon/green.png">
 
 
 
 <meta name="twitter:card" content="summary" />
 
-<meta name="twitter:creator" content="" />
 
 
 <meta property="og:locale" content="en" />
@@ -57,7 +55,7 @@ nginx With Fedora and nginx and selinux all in use simultaneously, you are allow
 <meta property="og:site_name" content="Selinux and Nginx" />
 
   
-    <meta property="og:image" content="https://ndumas.com/img/favicon/blue.png">
+    <meta property="og:image" content="https://ndumas.com/img/favicon/green.png">
   
 
 <meta property="og:image:width" content="2048">
@@ -78,7 +76,7 @@ nginx With Fedora and nginx and selinux all in use simultaneously, you are allow
 
 
 </head>
-<body class="">
+<body class="green">
 
 
 <div class="container full headings--one-size">
@@ -101,11 +99,11 @@ nginx With Fedora and nginx and selinux all in use simultaneously, you are allow
     
       
         
-          <li><a href="/about-me">About</a></li>
+          <li><a href="ndumas.com">About</a></li>
         
       
         
-          <li><a href="/portfolio">Portfolio</a></li>
+          <li><a href="portfolio.ndumas.com">Portfolio</a></li>
         
       
       
@@ -117,11 +115,11 @@ nginx With Fedora and nginx and selinux all in use simultaneously, you are allow
   <ul class="menu__inner menu__inner--mobile">
     
       
-        <li><a href="/about-me">About</a></li>
+        <li><a href="ndumas.com">About</a></li>
       
     
       
-        <li><a href="/portfolio">Portfolio</a></li>
+        <li><a href="portfolio.ndumas.com">Portfolio</a></li>
       
     
     
@@ -138,10 +136,10 @@ nginx With Fedora and nginx and selinux all in use simultaneously, you are allow
   <h1 class="post-title">
     <a href="https://ndumas.com/posts/selinux-and-nginx/">Selinux and Nginx</a></h1>
   <div class="post-meta">
-      
-    <span class="post-date">
-      2018-04-13
-    </span>
+    
+      <span class="post-date">
+        2018-04-13 
+      </span>
     
     
   </div>
@@ -160,20 +158,22 @@ nginx With Fedora and nginx and selinux all in use simultaneously, you are allow
 
   
 
+  
+
   <div class="post-content"><div>
         <h1 id="selinux">SELinux<a href="#selinux" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>DigitalOcean&rsquo;s Fedora droplets include SELinux. I don&rsquo;t know a great deal about SELinux but it&rsquo;s presumably a good thing for helping prevent privilege escalations and so on. Unfortunately, it can be troublesome when trying to do simple static site stuff with nginx.</p>
 <h2 id="nginx">nginx<a href="#nginx" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>With Fedora and nginx and selinux all in use simultaneously, you are allowed to tell nginx to serve files that are owned/grouped under a user other than nginx&rsquo;s. This is phenomenally useful when working with something like hugo. This is possible because SELinux monitors/intercepts syscalls relating to file access and approves/denies them based on context, role, and type. SELinux concepts are covered pretty thoroughly <a href="https://www.digitalocean.com/community/tutorials/an-introduction-to-selinux-on-centos-7-part-1-basic-concepts">here</a> and <a href="https://www.digitalocean.com/community/tutorials/an-introduction-to-selinux-on-centos-7-part-2-files-and-processes">here</a>.</p>
 <p>By default, nginx runs under the SELinux <code>system_u</code> user, the <code>system_r</code> role, and the <code>httpd_t</code> type:</p>
-<pre><code>$ ps -efZ|grep 'nginx'
+<pre tabindex="0"><code>$ ps -efZ|grep &#39;nginx&#39;
 system_u:system_r:httpd_t:s0    root     30543     1  0 Apr09 ?        00:00:00 nginx: master process /usr/sbin/nginx
 system_u:system_r:httpd_t:s0    nginx    30544 30543  0 Apr09 ?        00:00:02 nginx: worker process
 system_u:system_r:httpd_t:s0    nginx    30545 30543  0 Apr09 ?        00:00:00 nginx: worker process
 $
 </code></pre><p>Roughly speaking, SELinux compares nginx&rsquo;s user, role, and type against the same values on any value it&rsquo;s trying to access. If the values conflict, SELinux denies access. In the context of &ldquo;I&rsquo;ve got a pile of files I want nginx to serve&rdquo;, this denial manifests as a 403 error. This has caused issues for me repeatedly. genesis generates terrain renders as directories containing html and json files, and during the development and debugging process I just copy these directly into the <code>/var/www</code> directory for my renders.ndumas.com subdomain. Before I discovered the long term fix described below, every one of these new pages was throwing a 404 because this directory and its files did not have the <code>httpd_sys_content_t</code> type set. This caused nginx to be denied permission to read them and a 403 error.</p>
 <p>A correctly set directory looks like this:</p>
-<pre><code>$ ls -Z
+<pre tabindex="0"><code>$ ls -Z
 unconfined_u:object_r:httpd_sys_content_t:s0 demo/                 unconfined_u:object_r:user_home_t:s0 sampleTest2/  unconfined_u:object_r:httpd_sys_content_t:s0 test2/
 unconfined_u:object_r:httpd_sys_content_t:s0 sampleTest1/  unconfined_u:object_r:httpd_sys_content_t:s0 test1/
 $
@@ -186,32 +186,34 @@ $
 <p>You can tell SELinux &ldquo;httpd processes are allowed to access files owned by other users&rdquo; with the following command: <code>setsebool -P httpd_read_user_content 1</code>. This is pretty straightforward and I confirmed that any content I move into the /var/www directories can now be read by nginx.</p>
 
       </div></div>
+
   
-  <div class="pagination">
+  
+<div class="pagination">
     <div class="pagination__title">
-      <span
-        class="pagination__title-h">explore</span>
-      <hr />
+        <span class="pagination__title-h">explore</span>
+        <hr />
     </div>
     <div class="pagination__buttons">
-      
-      <span class="button previous">
-        <a href="https://ndumas.com/posts/golang-quantize/">
-          <span class="button__icon">←</span>
-          <span class="button__text">Golang Quantize</span>
-        </a>
-      </span>
-      
-      
-      <span class="button next">
-        <a href="https://ndumas.com/posts/genesis-flags/">
-          <span class="button__text">Genesis Flags</span>
-          <span class="button__icon">→</span>
-        </a>
-      </span>
-      
+        
+        <span class="button previous">
+            <a href="https://ndumas.com/posts/golang-quantize/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Golang Quantize</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://ndumas.com/posts/genesis-flags/">
+                <span class="button__text">Genesis Flags</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
     </div>
-  </div>
+</div>
+
   
 
   
@@ -225,7 +227,7 @@ $
   <div class="footer__inner">
     
       <div class="copyright copyright--user">
-        <span>Nicholas Dumas 2020</span>
+        <span>Nicholas Dumas 2022</span>
     
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>

@@ -6,12 +6,8 @@
     <description>Recent content in prometheus on code and stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Nicholas Dumas 2020</copyright>
-    <lastBuildDate>Mon, 08 Jul 2019 10:45:07 -0400</lastBuildDate>
-    
-	<atom:link href="https://ndumas.com/tags/prometheus/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Nicholas Dumas 2022</copyright>
+    <lastBuildDate>Mon, 08 Jul 2019 10:45:07 -0400</lastBuildDate><atom:link href="https://ndumas.com/tags/prometheus/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Path of Market: Part 1</title>
       <link>https://ndumas.com/posts/path-of-market1/</link>

@@ -6,12 +6,8 @@
     <description>Recent content in go on code and stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Nicholas Dumas 2020</copyright>
-    <lastBuildDate>Mon, 08 Jul 2019 10:45:07 -0400</lastBuildDate>
-    
-	<atom:link href="https://ndumas.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Nicholas Dumas 2022</copyright>
+    <lastBuildDate>Wed, 06 Feb 2019 14:58:22 +0000</lastBuildDate><atom:link href="https://ndumas.com/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Data Interfaces</title>
       <link>https://ndumas.com/posts/data-interfaces/</link>
@@ -19,7 +15,7 @@
       
       <guid>https://ndumas.com/posts/data-interfaces/</guid>
       <description>interfaces I&amp;rsquo;m a fan of Go&amp;rsquo;s interfaces. They&amp;rsquo;re really simple and don&amp;rsquo;t require a lot of legwork.
-1 2 3 4 5 6 7 8 9 10 11  type Mover interface { func Move(x, y int) (int, int) } type Dog struct { Name string } func (d Dog) Move(x, y int) (int, int) { return x, y }   Dog is now a Mover! No need for keywords like implements.</description>
+1 2 3 4 5 6 7 8 9 10 11 type Mover interface { func Move(x, y int) (int, int) } type Dog struct { Name string } func (d Dog) Move(x, y int) (int, int) { return x, y } Dog is now a Mover! No need for keywords like implements. The compiler just checks at the various boundaries in your app, like struct definitions and function signatures.</description>
     </item>
     
   </channel>

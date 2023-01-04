@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   
-    <title>Standing Up Gogs :: code and stuff — sometimes i make stuff</title>
+    <title>Standing Up Gogs :: code and stuff</title>
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="The Reveal It took me way longer than I&amp;rsquo;d like to admit but I finally discovered why I was not able to properly reverse proxy a subdomain ( git.ndumas.com ). As it turns out, SELinux was the culprit. I wanted to write a short post about this partly to reinforce my own memory and maybe to make this sort of thing easier to find for others encountering &amp;lsquo;mysterious&amp;rsquo; issues when operating on SELinux Fedora installations like Digital Ocean droplets." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
@@ -26,10 +26,9 @@ if (!doNotTrack) {
 </script>
 
 
-
 <link rel="stylesheet" href="https://ndumas.com/assets/style.css">
 
-  <link rel="stylesheet" href="https://ndumas.com/assets/blue.css">
+  <link rel="stylesheet" href="https://ndumas.com/assets/green.css">
 
 
 
@@ -38,13 +37,12 @@ if (!doNotTrack) {
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ndumas.com/img/apple-touch-icon-144-precomposed.png">
 
-  <link rel="shortcut icon" href="https://ndumas.com/img/favicon/blue.png">
+  <link rel="shortcut icon" href="https://ndumas.com/img/favicon/green.png">
 
 
 
 <meta name="twitter:card" content="summary" />
 
-<meta name="twitter:creator" content="" />
 
 
 <meta property="og:locale" content="en" />
@@ -55,7 +53,7 @@ if (!doNotTrack) {
 <meta property="og:site_name" content="Standing Up Gogs" />
 
   
-    <meta property="og:image" content="https://ndumas.com/img/favicon/blue.png">
+    <meta property="og:image" content="https://ndumas.com/img/favicon/green.png">
   
 
 <meta property="og:image:width" content="2048">
@@ -76,7 +74,7 @@ if (!doNotTrack) {
 
 
 </head>
-<body class="">
+<body class="green">
 
 
 <div class="container full headings--one-size">
@@ -99,11 +97,11 @@ if (!doNotTrack) {
     
       
         
-          <li><a href="/about-me">About</a></li>
+          <li><a href="ndumas.com">About</a></li>
         
       
         
-          <li><a href="/portfolio">Portfolio</a></li>
+          <li><a href="portfolio.ndumas.com">Portfolio</a></li>
         
       
       
@@ -115,11 +113,11 @@ if (!doNotTrack) {
   <ul class="menu__inner menu__inner--mobile">
     
       
-        <li><a href="/about-me">About</a></li>
+        <li><a href="ndumas.com">About</a></li>
       
     
       
-        <li><a href="/portfolio">Portfolio</a></li>
+        <li><a href="portfolio.ndumas.com">Portfolio</a></li>
       
     
     
@@ -136,10 +134,10 @@ if (!doNotTrack) {
   <h1 class="post-title">
     <a href="https://ndumas.com/posts/standing-up-gogs/">Standing Up Gogs</a></h1>
   <div class="post-meta">
-      
-    <span class="post-date">
-      2018-02-20
-    </span>
+    
+      <span class="post-date">
+        2018-02-20 
+      </span>
     
     
   </div>
@@ -154,46 +152,50 @@ if (!doNotTrack) {
 
   
 
+  
+
   <div class="post-content"><div>
         <h1 id="the-reveal">The Reveal<a href="#the-reveal" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>It took me way longer than I&rsquo;d like to admit but I finally discovered why I was not able to properly reverse proxy a subdomain ( <a href="http://git.ndumas.com">git.ndumas.com</a> ). As it turns out, SELinux was the culprit. I wanted to write a short post about this partly to reinforce my own memory and maybe to make this sort of thing easier to find for others encountering &lsquo;mysterious&rsquo; issues when operating on SELinux Fedora installations like Digital Ocean droplets.</p>
 <h1 id="symptoms">Symptoms<a href="#symptoms" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>SELinux interference with nginx doing its business will generally manifest as a variation on &ldquo;permission denied&rdquo;. Here&rsquo;s one such error message:</p>
-<pre><code>2018/02/20 23:32:51 [crit] 4679#0: *1 connect() to 127.0.0.1:3000 failed (13: Permission denied) while connecting to upstream, client: xxx.xxx.xxx.xxx, server: git.ndumas.com, request: &quot;GET /favicon.ico HTTP/1.1&quot;, upstream: &quot;http://127.0.0.1:3000/favicon.ico&quot;, host: &quot;git.ndumas.com&quot;, referrer: &quot;http://git.ndumas.com/&quot;
+<pre tabindex="0"><code>2018/02/20 23:32:51 [crit] 4679#0: *1 connect() to 127.0.0.1:3000 failed (13: Permission denied) while connecting to upstream, client: xxx.xxx.xxx.xxx, server: git.ndumas.com, request: &#34;GET /favicon.ico HTTP/1.1&#34;, upstream: &#34;http://127.0.0.1:3000/favicon.ico&#34;, host: &#34;git.ndumas.com&#34;, referrer: &#34;http://git.ndumas.com/&#34;
 </code></pre><h1 id="solution">Solution<a href="#solution" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>Resolving this requires whitelisting whatever action/context SELinux is restricting. There&rsquo;s a useful tool, <code>audit2allow</code>, that will build a module for you automatically. You can invoke it like this:</p>
-<pre><code>sudo cat /var/log/audit.log|grep nginx|grep denied|audit2allow -M filename
+<pre tabindex="0"><code>sudo cat /var/log/audit.log|grep nginx|grep denied|audit2allow -M filename
 </code></pre><p>Once you&rsquo;ve done this, you&rsquo;ll have a file named <code>filename.pp</code>. All you have to do next is:</p>
-<pre><code>semodule -i filename.pp
+<pre tabindex="0"><code>semodule -i filename.pp
 </code></pre><p>SELinux will revise its policies and any restrictions nginx encountered will be whitelisted.</p>
 
       </div></div>
+
   
-  <div class="pagination">
+  
+<div class="pagination">
     <div class="pagination__title">
-      <span
-        class="pagination__title-h">explore</span>
-      <hr />
+        <span class="pagination__title-h">explore</span>
+        <hr />
     </div>
     <div class="pagination__buttons">
-      
-      <span class="button previous">
-        <a href="https://ndumas.com/posts/genesis-flags/">
-          <span class="button__icon">←</span>
-          <span class="button__text">Genesis Flags</span>
-        </a>
-      </span>
-      
-      
-      <span class="button next">
-        <a href="https://ndumas.com/posts/first-post/">
-          <span class="button__text">First Post</span>
-          <span class="button__icon">→</span>
-        </a>
-      </span>
-      
+        
+        <span class="button previous">
+            <a href="https://ndumas.com/posts/genesis-flags/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Genesis Flags</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://ndumas.com/posts/first-post/">
+                <span class="button__text">First Post</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
     </div>
-  </div>
+</div>
+
   
 
   
@@ -207,7 +209,7 @@ if (!doNotTrack) {
   <div class="footer__inner">
     
       <div class="copyright copyright--user">
-        <span>Nicholas Dumas 2020</span>
+        <span>Nicholas Dumas 2022</span>
     
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>

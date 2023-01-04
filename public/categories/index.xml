@@ -6,10 +6,6 @@
     <description>Recent content in Categories on code and stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Nicholas Dumas 2020</copyright>
-    
-	<atom:link href="https://ndumas.com/categories/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Nicholas Dumas 2022</copyright><atom:link href="https://ndumas.com/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
