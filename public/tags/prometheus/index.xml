@@ -2,28 +2,28 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>prometheus on code and stuff</title>
-    <link>https://ndumas.com/tags/prometheus/</link>
+    <link>https://blog.ndumas.com/tags/prometheus/</link>
     <description>Recent content in prometheus on code and stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Nicholas Dumas 2022</copyright>
-    <lastBuildDate>Mon, 08 Jul 2019 10:45:07 -0400</lastBuildDate><atom:link href="https://ndumas.com/tags/prometheus/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 08 Jul 2019 10:45:07 -0400</lastBuildDate><atom:link href="https://blog.ndumas.com/tags/prometheus/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Path of Market: Part 1</title>
-      <link>https://ndumas.com/posts/path-of-market1/</link>
+      <link>https://blog.ndumas.com/posts/path-of-market1/</link>
       <pubDate>Mon, 08 Jul 2019 10:45:07 -0400</pubDate>
       
-      <guid>https://ndumas.com/posts/path-of-market1/</guid>
+      <guid>https://blog.ndumas.com/posts/path-of-market1/</guid>
       <description>Path of Exile is an ARPG similar to Diablo: procedurally generated maps, kill monsters to get loot so you can kill monsters faster. It&amp;rsquo;s pretty fun and offers a really flexible build system that allows for a lot of creativity in how you achieve your goals. Of particular interest is the API exposed by the development team.
 Stashes Each character has a set of &amp;ldquo;stashes&amp;rdquo;. These are storage boxes which can be flagged a public.</description>
     </item>
     
     <item>
       <title>Prometheus Primer</title>
-      <link>https://ndumas.com/posts/prom-primer/</link>
+      <link>https://blog.ndumas.com/posts/prom-primer/</link>
       <pubDate>Thu, 04 Jul 2019 14:56:12 -0400</pubDate>
       
-      <guid>https://ndumas.com/posts/prom-primer/</guid>
+      <guid>https://blog.ndumas.com/posts/prom-primer/</guid>
       <description>Querying Basics Queries run against metrics, which are sets of timeseries data. They have millisecond granularity and are stored as floating point values.
 Using Queries Queries reference individual metrics and perform some analysis on them. Most often you use the rate function to &amp;ldquo;bucket&amp;rdquo; a metric into time intervals. Once the metric in question has been bucketed into time intervals, you can do comparisons.
 (rate(http_response_size_bytes[1m])) &amp;gt; 512 This query takes the size of http responses in bytes and buckets it into one minute intervals and drops any data points smaller than 512 bytes.</description>

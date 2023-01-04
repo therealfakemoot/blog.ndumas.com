@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>code and stuff</title>
-    <link>https://ndumas.com/</link>
+    <link>https://blog.ndumas.com/</link>
     <description>Recent content on code and stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Nicholas Dumas 2022</copyright>
-    <lastBuildDate>Mon, 08 Jul 2019 10:45:07 -0400</lastBuildDate><atom:link href="https://ndumas.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 08 Jul 2019 10:45:07 -0400</lastBuildDate><atom:link href="https://blog.ndumas.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Baas Overview</title>
-      <link>https://ndumas.com/baas-overview/</link>
+      <link>https://blog.ndumas.com/baas-overview/</link>
       <pubDate>Mon, 27 Jan 2020 13:13:36 -0500</pubDate>
       
-      <guid>https://ndumas.com/baas-overview/</guid>
+      <guid>https://blog.ndumas.com/baas-overview/</guid>
       <description>this is just a dummy page to help me figure out how to work with hugo again</description>
     </item>
     
     <item>
       <title>Path of Market: Part 1</title>
-      <link>https://ndumas.com/posts/path-of-market1/</link>
+      <link>https://blog.ndumas.com/posts/path-of-market1/</link>
       <pubDate>Mon, 08 Jul 2019 10:45:07 -0400</pubDate>
       
-      <guid>https://ndumas.com/posts/path-of-market1/</guid>
+      <guid>https://blog.ndumas.com/posts/path-of-market1/</guid>
       <description>Path of Exile is an ARPG similar to Diablo: procedurally generated maps, kill monsters to get loot so you can kill monsters faster. It&amp;rsquo;s pretty fun and offers a really flexible build system that allows for a lot of creativity in how you achieve your goals. Of particular interest is the API exposed by the development team.
 Stashes Each character has a set of &amp;ldquo;stashes&amp;rdquo;. These are storage boxes which can be flagged a public.</description>
     </item>
     
     <item>
       <title>Prometheus Primer</title>
-      <link>https://ndumas.com/posts/prom-primer/</link>
+      <link>https://blog.ndumas.com/posts/prom-primer/</link>
       <pubDate>Thu, 04 Jul 2019 14:56:12 -0400</pubDate>
       
-      <guid>https://ndumas.com/posts/prom-primer/</guid>
+      <guid>https://blog.ndumas.com/posts/prom-primer/</guid>
       <description>Querying Basics Queries run against metrics, which are sets of timeseries data. They have millisecond granularity and are stored as floating point values.
 Using Queries Queries reference individual metrics and perform some analysis on them. Most often you use the rate function to &amp;ldquo;bucket&amp;rdquo; a metric into time intervals. Once the metric in question has been bucketed into time intervals, you can do comparisons.
 (rate(http_response_size_bytes[1m])) &amp;gt; 512 This query takes the size of http responses in bytes and buckets it into one minute intervals and drops any data points smaller than 512 bytes.</description>
@@ -40,69 +40,69 @@ Using Queries Queries reference individual metrics and perform some analysis on 
     
     <item>
       <title>Making Noise</title>
-      <link>https://ndumas.com/posts/making-noise/</link>
+      <link>https://blog.ndumas.com/posts/making-noise/</link>
       <pubDate>Thu, 28 Feb 2019 19:37:06 +0000</pubDate>
       
-      <guid>https://ndumas.com/posts/making-noise/</guid>
+      <guid>https://blog.ndumas.com/posts/making-noise/</guid>
       <description>The Conceit I&amp;rsquo;ve written about Genesis before, but it&amp;rsquo;s got a lot of complexity attached to it, and the roadmap I originally laid out has shifted a bit. For this post I&amp;rsquo;m focusing solely on Phase 1, the generation of geography. This is obviously a fundamental starting point, and it has roadblocked my progress on Genesis for quite some time ( somewhere on the order of 8 years or so ).</description>
     </item>
     
     <item>
       <title>Portfolio</title>
-      <link>https://ndumas.com/portfolio/</link>
+      <link>https://blog.ndumas.com/portfolio/</link>
       <pubDate>Wed, 06 Feb 2019 15:13:58 +0000</pubDate>
       
-      <guid>https://ndumas.com/portfolio/</guid>
+      <guid>https://blog.ndumas.com/portfolio/</guid>
       <description>Genesis Genesis is a toolkit for creative world design; it offers both procedural and manual means of creating and modifying the geography, climate, political/economic, and structural characteristics of a given world. Uses can allow automatic generation to take over for the entirety of the world&amp;rsquo;s attributes, or they can step in at one of several discrete phases making modifications to suit their needs.
 SLAyer SLAyer is a toolkit used to enforce service level agreements on collections of tickets.</description>
     </item>
     
     <item>
       <title>About Me</title>
-      <link>https://ndumas.com/about-me/</link>
+      <link>https://blog.ndumas.com/about-me/</link>
       <pubDate>Wed, 06 Feb 2019 15:13:49 +0000</pubDate>
       
-      <guid>https://ndumas.com/about-me/</guid>
+      <guid>https://blog.ndumas.com/about-me/</guid>
       <description>I&amp;rsquo;m a self taught developer and sys admin. I&amp;rsquo;ve been a janitor, and even installed some hurricane-proofing on a prison in Florida one summer. I&amp;rsquo;ve spent a great deal of my career working with Python, but I&amp;rsquo;ve brought myself up to speed on Golang, which is my main squeeze.
 My big project is genesis, a procedural world generation toolkit focused on interactivity and iterative edits; I&amp;rsquo;ve written about this in some depth, and this is my major passion project.</description>
     </item>
     
     <item>
       <title>Data Interfaces</title>
-      <link>https://ndumas.com/posts/data-interfaces/</link>
+      <link>https://blog.ndumas.com/posts/data-interfaces/</link>
       <pubDate>Wed, 06 Feb 2019 14:58:22 +0000</pubDate>
       
-      <guid>https://ndumas.com/posts/data-interfaces/</guid>
+      <guid>https://blog.ndumas.com/posts/data-interfaces/</guid>
       <description>interfaces I&amp;rsquo;m a fan of Go&amp;rsquo;s interfaces. They&amp;rsquo;re really simple and don&amp;rsquo;t require a lot of legwork.
 1 2 3 4 5 6 7 8 9 10 11 type Mover interface { func Move(x, y int) (int, int) } type Dog struct { Name string } func (d Dog) Move(x, y int) (int, int) { return x, y } Dog is now a Mover! No need for keywords like implements. The compiler just checks at the various boundaries in your app, like struct definitions and function signatures.</description>
     </item>
     
     <item>
       <title>Golang Quantize</title>
-      <link>https://ndumas.com/posts/golang-quantize/</link>
+      <link>https://blog.ndumas.com/posts/golang-quantize/</link>
       <pubDate>Sun, 22 Apr 2018 17:30:51 +0000</pubDate>
       
-      <guid>https://ndumas.com/posts/golang-quantize/</guid>
+      <guid>https://blog.ndumas.com/posts/golang-quantize/</guid>
       <description>The Goal Before going too deep into the implementation details of Genesis, I&amp;rsquo;ll touch on the high level aspect of quantization. Quantization is a technique used to map arbitrary inputs into a well defined output space. This is, practically speaking, a hash function. When the term &amp;lsquo;quantization&amp;rsquo; is used, however, it&amp;rsquo;s typically numeric in nature. Quantization is typically used in audio/image processing to compress inputs for storage or transmission.
 Quantizing OpenSimplex My use case is a little less straightforward.</description>
     </item>
     
     <item>
       <title>Selinux and Nginx</title>
-      <link>https://ndumas.com/posts/selinux-and-nginx/</link>
+      <link>https://blog.ndumas.com/posts/selinux-and-nginx/</link>
       <pubDate>Fri, 13 Apr 2018 16:28:20 +0000</pubDate>
       
-      <guid>https://ndumas.com/posts/selinux-and-nginx/</guid>
+      <guid>https://blog.ndumas.com/posts/selinux-and-nginx/</guid>
       <description>SELinux DigitalOcean&amp;rsquo;s Fedora droplets include SELinux. I don&amp;rsquo;t know a great deal about SELinux but it&amp;rsquo;s presumably a good thing for helping prevent privilege escalations and so on. Unfortunately, it can be troublesome when trying to do simple static site stuff with nginx.
 nginx With Fedora and nginx and selinux all in use simultaneously, you are allowed to tell nginx to serve files that are owned/grouped under a user other than nginx&amp;rsquo;s.</description>
     </item>
     
     <item>
       <title>Genesis Flags</title>
-      <link>https://ndumas.com/posts/genesis-flags/</link>
+      <link>https://blog.ndumas.com/posts/genesis-flags/</link>
       <pubDate>Sun, 08 Apr 2018 03:44:21 +0000</pubDate>
       
-      <guid>https://ndumas.com/posts/genesis-flags/</guid>
+      <guid>https://blog.ndumas.com/posts/genesis-flags/</guid>
       <description>Genesis Genesis is a project I’ve spent a great deal of time thinking about and working on for a while with little progress. I’m recycling my old Github blog post because it still highlights the overall design plan. I’ve since altered the project to use Golang instead of CPython. The change is inspired by a desire/need for improved performance, in my view Golang is the perfect tool to accomplish this goal and is the natural next step in my progression as a developer.</description>
     </item>
     
