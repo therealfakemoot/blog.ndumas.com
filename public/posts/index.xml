@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Nicholas Dumas 2022</copyright>
-    <lastBuildDate>Mon, 08 Jul 2019 10:45:07 -0400</lastBuildDate><atom:link href="https://blog.ndumas.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.ndumas.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Automating Caddy on my DigitalOcean Droplet</title>
+      <link>https://blog.ndumas.com/posts/automating-caddy-on-my-droplet/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.ndumas.com/posts/automating-caddy-on-my-droplet/</guid>
+      <description>Defining units of work I&amp;rsquo;ve got a few different websites that I want to run: this blog, my portfolio, and my about page which acts as a hub for my other sites, my Bandcamp, and whatever else I end up wanting to show off.
+To keep things maintainable and reproducible, I decided to stop attempting to create a monolithic all-in-one configuration file. This made it way harder to keep changes atomic; multiple iterations on my blog started impacting my prank websites, and it became harder and harder to return my sites to a working state.</description>
+    </item>
+    
     <item>
       <title>Path of Market: Part 1</title>
       <link>https://blog.ndumas.com/posts/path-of-market1/</link>
@@ -94,15 +104,6 @@ nginx With Fedora and nginx and selinux all in use simultaneously, you are allow
       <guid>https://blog.ndumas.com/posts/first-post/</guid>
       <description>Introduction I&amp;rsquo;ve been programming with a passion for the last 15 years. I started with Python 2.2 or so and stuck with that for a good while, I also spent a few years doing web development work and most recently added Golang to my kit.
 This Site This site is going to be a portfolio/showroom for my projects. I&amp;rsquo;ll try to find clever ways to interact with my tools through the browser to take advantage of the optimizations and growing array of high power tools being baked into browsers like Chrome and Firefox.</description>
-    </item>
-    
-    <item>
-      <title>Genesis Roadmap</title>
-      <link>https://blog.ndumas.com/posts/genesis-roadmap/</link>
-      <pubDate>Mon, 03 Jun 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.ndumas.com/posts/genesis-roadmap/</guid>
-      <description>Recently, I was working on an idea for a MUD; the general idea was to build a game with detailed &amp;lsquo;inhabited&amp;rsquo; areas such as cities and dungeons as well as expansive wilderness regions for exploring and claiming by players. Naturally, I realized that doing this by hand would be unbearably tedious. A semi-realistic MUD world could contain 4,000,000 rooms; manually creating &amp;ldquo;Meadowy Plains #1421&amp;rdquo; would be error-prone and would drain the creative ability of a human.</description>
     </item>
     
   </channel>

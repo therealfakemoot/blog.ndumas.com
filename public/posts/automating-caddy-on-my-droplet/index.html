@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Automating Caddy on my DigitalOcean Droplet :: code and stuff</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Defining units of work I&amp;rsquo;ve got a few different websites that I want to run: this blog, my portfolio, and my about page which acts as a hub for my other sites, my Bandcamp, and whatever else I end up wanting to show off.
+To keep things maintainable and reproducible, I decided to stop attempting to create a monolithic all-in-one configuration file. This made it way harder to keep changes atomic; multiple iterations on my blog started impacting my prank websites, and it became harder and harder to return my sites to a working state." />
+<meta name="keywords" content=", " />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://blog.ndumas.com/posts/automating-caddy-on-my-droplet/" />
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-113907906-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+<link rel="stylesheet" href="https://blog.ndumas.com/assets/style.css">
+
+  <link rel="stylesheet" href="https://blog.ndumas.com/assets/pink.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://blog.ndumas.com/img/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="https://blog.ndumas.com/img/favicon/pink.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Automating Caddy on my DigitalOcean Droplet :: code and stuff">
+<meta property="og:description" content="Automation ambitions fall flat" />
+<meta property="og:url" content="https://blog.ndumas.com/posts/automating-caddy-on-my-droplet/" />
+<meta property="og:site_name" content="Automating Caddy on my DigitalOcean Droplet" />
+
+  <meta property="og:image" content="https://blog.ndumas.com">
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2023-01-05 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="pink">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    digital wizardry
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+    <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="https://ndumas.com">About</a></li>
+        
+      
+        
+          <li><a href="https://portfolio.ndumas.com">Portfolio</a></li>
+        
+      
+      
+    
+
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="https://ndumas.com">About</a></li>
+      
+    
+      
+        <li><a href="https://portfolio.ndumas.com">Portfolio</a></li>
+      
+    
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://blog.ndumas.com/posts/automating-caddy-on-my-droplet/">Automating Caddy on my DigitalOcean Droplet</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2023-01-05 
+      </span>
+    
+    
+    <span class="post-author">:: Nick Dumas</span>
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="https://blog.ndumas.com/tags/webdev/">webdev</a>&nbsp;
+    
+    #<a href="https://blog.ndumas.com/tags/devops/">devops</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="defining-units-of-work">Defining units of work<a href="#defining-units-of-work" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>I&rsquo;ve got a few different websites that I want to run: this blog, my portfolio, and my about page which acts as a hub for my other sites, my Bandcamp, and whatever else I end up wanting to show off.</p>
+<p>To keep things maintainable and reproducible, I decided to stop attempting to create a monolithic all-in-one configuration file. This made it way harder to keep changes atomic; multiple iterations on my blog started impacting my prank websites, and it became harder and harder to return my sites to a working state.</p>
+<h1 id="proof-of-concept">Proof of concept<a href="#proof-of-concept" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>The first test case was my blog because I knew the Hugo build was fine, I just needed to get Caddy serving again.</p>
+<p>A static site is pretty straightforward with Caddy:</p>
+<pre tabindex="0"><code>blog.ndumas.com {
+    encode gzip
+    fileserver
+    root * /var/www/blog.ndumas.com
+}
+</code></pre><p>And telling Caddy to load it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#e6db74">&#34;http://localhost:2019/load&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>	-H <span style="color:#e6db74">&#34;Content-Type: text/caddyfile&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>	--data-binary @blog.ndumas.com.caddy
+</span></span></code></pre></div><p>This all works perfectly, Caddy&rsquo;s more than happy to load this but it does warn that the file hasn&rsquo;t be formatted with <code>caddy fmt</code>:</p>
+<pre tabindex="0"><code>[{&#34;file&#34;:&#34;Caddyfile&#34;,&#34;line&#34;:2,&#34;message&#34;:&#34;input is not formatted with &#39;caddy fmt&#39;&#34;}]
+</code></pre><h1 id="the-loop">The loop<a href="#the-loop" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Here&rsquo;s where things went sideways. Now that I have two unit files, I&rsquo;m ready to work on the tooling that will dynamically load my config. For now, I&rsquo;m just chunking it all out in <code>bash</code>. I&rsquo;ve got no particular fondness for <code>bash</code>, but it&rsquo;s always a bit of a matter of pride to see whether or not I <em>can</em>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># load-caddyfile</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#! /bin/bash</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> loadConf<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    curl localhost:2019/load <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        -X POST <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        -H <span style="color:#e6db74">&#34;Content-Type: text/caddyfile&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        --data-binary @<span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>loadConf <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># load-caddyfiles</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#! /bin/bash</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>source load-caddyfile
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sudo caddy stop</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sudo caddy start</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> f in <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">/*.caddy&#34;</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    echo -e <span style="color:#e6db74">&#34;Loading </span><span style="color:#66d9ef">$(</span>basename $f<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    loadConf <span style="color:#e6db74">&#34;</span>$f<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    echo
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span></code></pre></div><p>After implementing the loop my barelylegaltrout.biz site started throwing a 525 while blog.ndumas.com continued working perfectly. This was a real head scratcher, and I had to let the problem sit for a day before I came back to it.</p>
+<p>After some boring troubleshooting legwork, I realized I misunderstood how the <code>/load</code> endpoint works. This endpoint completely replaces the current config with the provided payload. In order to do partial updates, I&rsquo;d need to use the <code>PATCH</code> calls, and look who&rsquo;s back?</p>
+<h1 id="cant-escape-json">can&rsquo;t escape JSON<a href="#cant-escape-json" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>The <code>PATCH</code> API <em>does</em> let you do partial updates, but it requires your payloads be JSON which does make sense. Because my current set of requirements explicitly excludes any JSON ( for now ), I&rsquo;m going to have to ditch my dreams of modular code.</p>
+<p>Not all my code has gone to waste, though. Now that I know <code>POST</code>ing to to <code>/load</code> overwrites the whole configuration, I don&rsquo;t need to worry about stopping/restarting the caddy process to get a clean slate. <code>load-caddyfile</code> will let me keep iterating as I make changes.</p>
+<h1 id="proxies">Proxies<a href="#proxies" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>In addition to the static sites I&rsquo;m running a few applications to make life a little easier. I&rsquo;ll showcase my Gitea/Gitlab and Asciinema configs. At the moment, my setup for these are really janky, I&rsquo;ve got a <code>tmux</code> session on my droplet where I&rsquo;ve manually invoked <code>docker-compse up</code>. I&rsquo;ll leave cleaning that up and making systemd units or something proper out of them for a future project.</p>
+<p>Reverse proxying with Caddy is blessedly simple:</p>
+<pre tabindex="0"><code>cast.ndumas.com {
+    encode gzip
+    reverse_proxy localhost:10083
+}
+</code></pre><pre tabindex="0"><code>code.ndumas.com {
+    encode gzip
+    reverse_proxy localhost:3069
+}
+</code></pre><p>With that, my gitea/gitlab is up and running along with my Asciinema instance is as well:</p>
+<p><a href="https://cast.ndumas.com/a/28"><img src="https://cast.ndumas.com/a/28.svg" alt="asciicast"></a></p>
+<h1 id="back-to-square-one">Back to Square One<a href="#back-to-square-one" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>After finally making an honest attempt to learn how to work with Caddy 2 and its configurations and admin API, I want to take a swing at making a systemd unit file for Caddy to make this a proper setup.</p>
+<h1 id="finally">Finally<a href="#finally" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Here&rsquo;s what&rsquo;s currently up and running:</p>
+<ul>
+<li><a href="blog.ndumas.com">My blog</a></li>
+<li><a href="blog.ndumas.com">Asciinema</a></li>
+<li><a href="blog.ndumas.com">Gitea</a></li>
+</ul>
+<p>I&rsquo;ve had loads of toy projects over the years ( stay tuned for butts.ndumas.com ) which may come back, but for now I&rsquo;m hoping these are going to help me focus on creative, stimulating projects in the future.</p>
+<p>The punchline is that I still haven&rsquo;t really automated Caddy; good thing you can count on <code>tmux</code>
+<a href="https://cast.ndumas.com/a/aWYCFj69CjOg94kgjbGg4n2Uk"><img src="https://cast.ndumas.com/a/aWYCFj69CjOg94kgjbGg4n2Uk.svg" alt="asciicast"></a></p>
+<p>The final code can be found <a href="https://code.ndumas.com/ndumas/caddyfile">here</a>. Nothing fancy, but troublesome enough that it&rsquo;s worth remembering the problems I had.</p>
+
+      </div></div>
+
+  
+  
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">explore</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="https://blog.ndumas.com/posts/path-of-market1/">
+                <span class="button__text">Path of Market: Part 1</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>Nicholas Dumas 2022</span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://blog.ndumas.com/assets/main.js"></script>
+<script src="https://blog.ndumas.com/assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

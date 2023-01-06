@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>webdev on code and stuff</title>
+    <link>https://blog.ndumas.com/tags/webdev/</link>
+    <description>Recent content in webdev on code and stuff</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Nicholas Dumas 2022</copyright>
+    <lastBuildDate>Thu, 05 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.ndumas.com/tags/webdev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Automating Caddy on my DigitalOcean Droplet</title>
+      <link>https://blog.ndumas.com/posts/automating-caddy-on-my-droplet/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.ndumas.com/posts/automating-caddy-on-my-droplet/</guid>
+      <description>Defining units of work I&amp;rsquo;ve got a few different websites that I want to run: this blog, my portfolio, and my about page which acts as a hub for my other sites, my Bandcamp, and whatever else I end up wanting to show off.
+To keep things maintainable and reproducible, I decided to stop attempting to create a monolithic all-in-one configuration file. This made it way harder to keep changes atomic; multiple iterations on my blog started impacting my prank websites, and it became harder and harder to return my sites to a working state.</description>
+    </item>
+    
+  </channel>
+</rss>
